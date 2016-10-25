@@ -1,10 +1,13 @@
 package cn.mldn.singup.service.back.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +26,14 @@ public class MemberServiceBackImpl extends AbstractServiceBack implements IMembe
 	private IRoleDAO roleDAO;
 	@Resource
 	private IActionDAO actionDAO;
-
+	
+	@RequiresRoles("member")
+	@RequiresPermissions("member:list") 
+	@Override 
+	public List<Member> list() {
+		return this.memberDAO.findAll(); 
+	}
+	
 	@Override
 	@RequiresUser 
 	public boolean editPassword(String mid, String oldPassword, String newPassword) {

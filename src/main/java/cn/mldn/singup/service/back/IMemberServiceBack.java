@@ -1,10 +1,16 @@
 package cn.mldn.singup.service.back;
 
+import java.util.List;
 import java.util.Map;
 
 import cn.mldn.singup.vo.Member;
 
 public interface IMemberServiceBack {
+	/**
+	 * 实现全部用户的列表显示，调用IMemberDAO.findAll()查询
+	 * @return 如果没有数据则集合长度为0（size() == 0） 
+	 */
+	public List<Member> list() ;
 	/**
 	 * 实现密码的变更处理
 	 * @param mid 要修改密码的当前用户

@@ -1,10 +1,16 @@
 package cn.mldn.singup.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import cn.mldn.singup.vo.Member;
 
 public interface IMemberDAO {
+	/**
+	 * 查询全部的用户数据 
+	 * @return
+	 */
+	public List<Member> findAll() ;
 	/** 
 	 * 根据id实现member数据的查询过程
 	 * @param mid 要查询的mid的数据

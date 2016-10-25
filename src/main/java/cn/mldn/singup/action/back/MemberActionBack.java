@@ -2,7 +2,8 @@ package cn.mldn.singup.action.back;
 
 import javax.annotation.Resource;
 
-import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,16 @@ import cn.mldn.util.encrypt.MyPasswordEncrypt;
 public class MemberActionBack extends AbstractAction {
 	@Resource
 	private IMemberServiceBack memberServiceBack;
+	
+	@RequestMapping("list") 
+	@RequiresUser 
+	@RequiresRoles("member")
+	@RequiresPermissions("member:list") 
+	public ModelAndView list() {
+		ModelAndView mav = new ModelAndView(super.getValue("back.member.list.page")) ;
+		mav.addObject("allMembers", this.memberServiceBack.list()) ;
+		return mav ; 
+	}
 
 	@RequestMapping("editPassword")
 	@RequiresUser 
