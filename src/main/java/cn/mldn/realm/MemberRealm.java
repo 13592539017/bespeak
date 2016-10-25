@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -58,6 +59,7 @@ public class MemberRealm extends AuthorizingRealm {
 			// 将数据库中的密码与输入的密码进行比较，这样就可以确定当前用户是否可以正常登录
 			if (vo.getPassword().equals(password)) { // 密码正确
 				AuthenticationInfo auth = new SimpleAuthenticationInfo(username, password, "memberRealm");
+				SecurityUtils.getSubject().getSession().setAttribute("name", vo.getName());
 				return auth; 
 			} else {
 				throw new IncorrectCredentialsException("密码错误！");

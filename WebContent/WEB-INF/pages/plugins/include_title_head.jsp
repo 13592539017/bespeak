@@ -36,7 +36,7 @@
 						<!-- Menu Footer-->
 						<li class="user-footer">
 							<div class="text-center">
-								<a href="pages/back/member/member_password.jsp" class="btn btn-warning btn-flat"><i class="fa fa-puzzle-piece"></i>&nbsp;修改密码</a>
+								<a href="<%=basePath%>/admin/member/editPasswordPre.action" class="btn btn-warning btn-flat"><i class="fa fa-puzzle-piece"></i>&nbsp;修改密码</a> 
 								<a href="<%=basePath%>/admin/logoutUrl.action" class="btn btn-danger btn-flat"><i class="fa fa-xing"></i>&nbsp;系统注销</a> 
 							 </div>
 						</li>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.stereotype.Service;
 
 import cn.mldn.singup.dao.IActionDAO;
@@ -23,6 +24,21 @@ public class MemberServiceBackImpl extends AbstractServiceBack implements IMembe
 	@Resource
 	private IActionDAO actionDAO;
 
+	@Override
+	@RequiresUser 
+	public boolean editPassword(String mid, String oldPassword, String newPassword) {
+		Member vo = this.memberDAO.findById(mid) ;	// 根据已有的用户编号取得用户的完整信息
+		if (vo == null) {	// 该用户已经没有了
+			return false ;
+		} 
+		if (oldPassword.equals(vo.getPassword())) {	// 判断旧密码是否相等
+			Map<String,Object> params = new HashMap<String,Object>() ;
+			params.put("mid", mid) ;
+			params.put("newPassword", newPassword) ;
+			return this.memberDAO.doUpdatePassword(params) ; 
+		}
+		return false;
+	}
 	@Override
 	public Member get(String mid) {
 		return this.memberDAO.findById(mid);

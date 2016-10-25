@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.web.bind.WebDataBinder;
@@ -19,6 +20,20 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.mldn.util.file.UploadFileUtil;
 
 public abstract class AbstractAction {
+	/**
+	 * 取得当前登录的用户ID数据
+	 * @return
+	 */
+	public String getMid() {
+		return SecurityUtils.getSubject().getPrincipal().toString() ;
+	} 
+	/**
+	 * 实现注销操作
+	 */
+	public void logout() {
+		SecurityUtils.getSubject().logout();
+	}
+	
 	/**
 	 * 设置跳转后所需要的相关的提示信息以及自动跳转路径的内容
 	 * @param mav

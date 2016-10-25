@@ -29,7 +29,7 @@
 						</tr>
 						<tr>
 							<td><strong>总预约数量：</strong></td>
-							<td>20<shiro:hasRole name="member">xxx</shiro:hasRole></td>
+							<td>20</td>
 						</tr>
 						<tr>
 							<td><strong>新的预约：</strong></td>

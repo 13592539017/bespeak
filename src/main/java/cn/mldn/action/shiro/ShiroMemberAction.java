@@ -15,7 +15,7 @@ public class ShiroMemberAction extends AbstractAction {
 	public ModelAndView logoutUrl() {
 		ModelAndView mav = new ModelAndView(super.getValue("forward.back.page")) ;
 		super.setMsgAndUrl(mav, "shiro.logout.msg", "front.index.action");
-		SecurityUtils.getSubject().logout();
+		super.logout();
 		return mav ;
 	}
 	@RequestMapping("/admin/successUrl") 

@@ -1,5 +1,7 @@
 package cn.mldn.singup.dao;
 
+import java.util.Map;
+
 import cn.mldn.singup.vo.Member;
 
 public interface IMemberDAO {
@@ -9,4 +11,12 @@ public interface IMemberDAO {
 	 * @return
 	 */
 	public Member findById(String mid) ;
+	/**
+	 * 进行用户密码的修改处理
+	 * @param params 此时要传递两个参数：<br>
+	 * 参数一：key = mid、value = 要修改的用户编号；<br>
+	 * 参数二：key = newPassword、value = 加密后的新密码；<br>
+	 * @return 修改成功返回true，否则返回false
+	 */ 
+	public boolean doUpdatePassword(Map<String,Object> params) ;
 }

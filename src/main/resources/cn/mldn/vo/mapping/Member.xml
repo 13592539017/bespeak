@@ -7,4 +7,8 @@
 		SELECT mid,password,name,sflag,regdate,locked 
 		FROM member WHERE mid=#{mid} AND locked=0 ; 
 	</select>
+	<!-- 修改用户的密码，需要传入的是一个Map集合 -->
+	<update id="doUpdatePassword" parameterType="java.util.Map">
+		UPDATE member SET password=#{newPassword} WHERE mid=#{mid} ;
+	</update>
 </mapper>  

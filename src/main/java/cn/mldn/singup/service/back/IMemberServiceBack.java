@@ -6,6 +6,14 @@ import cn.mldn.singup.vo.Member;
 
 public interface IMemberServiceBack {
 	/**
+	 * 实现密码的变更处理
+	 * @param mid 要修改密码的当前用户
+	 * @param oldPassword 原始密码（加密后的数据）
+	 * @param newPassword 新的密码（加密后的数据）
+	 * @return 修改成功返回true，否则返回false
+	 */
+	public boolean editPassword(String mid,String oldPassword,String newPassword) ;
+	/**
 	 * 根据用户的id查询出用户的完整数据，调用：IMemberDAO.findById()
 	 * @param mid 
 	 * @return
