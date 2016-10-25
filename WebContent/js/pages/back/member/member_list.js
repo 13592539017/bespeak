@@ -1,3 +1,9 @@
+var formVar ;
+function myResetForm () {
+	formVar.resetForm() ;
+	$(passwordDiv).attr("class","form-group") ;
+	$(passwordMsg).text("*") ;
+}
 $(function(){
 	$("input[id*=statusBut-]").each(function(){
 		var mid = this.id.split("-") [1] ;
@@ -17,15 +23,19 @@ $(function(){
 		$(this).on("click",function(){
 			$(midTitleSpan).text(mid) ;
 			$(cpmid).val(mid) ;
+			$(password).val("") ;
+			myResetForm() ;
 			$(memberPasswordInfo).modal("toggle") ;
 		}) ;
 	}) ;
-	$("#myform").validate({
+	formVar = $("#myform").validate({
 		debug : true, // 取消表单的提交操作
 		submitHandler : function(form) {
-			console.log("mid = " + $(cpmid).val() + "，password = " + $(password).val()) ;
-			$(memberPasswordInfo).modal("toggle") ;
-			operateAlert(true , "用户登录密码修改成功！","用户登录密码修改失败！") ;
+			// console.log("mid = " + $(cpmid).val() + "，password = " + $(password).val()) ;
+			$.post("admin/member/editPasswordByAdmin.action",{"mid":$(cpmid).val(),"password":$(password).val()},function(data){
+				$(memberPasswordInfo).modal("toggle") ;
+				operateAlert(data.trim() == "true" , "用户登录密码修改成功！","用户登录密码修改失败，请确认您的级别！") ;
+			},"text") ;
 		},
 		errorPlacement : function(error, element) {
 			$("#" + $(element).attr("id").replace(".", "\\.") + "Msg").append(error);

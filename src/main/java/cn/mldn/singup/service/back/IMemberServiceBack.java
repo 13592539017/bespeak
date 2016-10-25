@@ -12,6 +12,13 @@ public interface IMemberServiceBack {
 	 */
 	public List<Member> list() ;
 	/**
+	 * 此处为修改指定用户密码的操作处理，调用IMemberDAO.doUpdatePasswordByAdmin()方法
+	 * @param mid 要修改的用户的编号  
+	 * @param password 经过加密后的新密码
+	 * @return 
+	 */
+	public boolean editPasswordByAdmin(String mid,String password) ;
+	/**
 	 * 实现密码的变更处理
 	 * @param mid 要修改密码的当前用户
 	 * @param oldPassword 原始密码（加密后的数据）

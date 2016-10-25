@@ -26,6 +26,15 @@ public class MemberServiceBackImpl extends AbstractServiceBack implements IMembe
 	private IRoleDAO roleDAO;
 	@Resource
 	private IActionDAO actionDAO;
+	@RequiresRoles("member")
+	@RequiresPermissions("member:edit") 
+	@Override
+	public boolean editPasswordByAdmin(String mid, String password) {
+		Map<String,Object> map = new HashMap<String,Object>() ;
+		map.put("mid", mid) ;
+		map.put("password", password) ;
+		return this.memberDAO.doUpdatePasswordByAdmin(map); 
+	}
 	
 	@RequiresRoles("member")
 	@RequiresPermissions("member:list") 

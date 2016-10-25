@@ -7,6 +7,14 @@ import cn.mldn.singup.vo.Member;
 
 public interface IMemberDAO {
 	/**
+	 * 实现用户密码的变更，但是不会变更超级管理员的密码
+	 * @param params 要进行变更的数据，包含有以下内容：<br>
+	 * key = mid、value = 要修改的用户编号；<br>
+	 * key = password、value = 要更改的新密码（已经加密过的）；<br>
+	 * @return
+	 */
+	public boolean doUpdatePasswordByAdmin(Map<String,Object> params) ;   
+	/**
 	 * 查询全部的用户数据 
 	 * @return
 	 */

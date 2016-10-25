@@ -1,6 +1,7 @@
 package cn.mldn.singup.action.back;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -18,19 +19,29 @@ import cn.mldn.util.encrypt.MyPasswordEncrypt;
 public class MemberActionBack extends AbstractAction {
 	@Resource
 	private IMemberServiceBack memberServiceBack;
-	
-	@RequestMapping("list") 
-	@RequiresUser 
+
+	@RequestMapping("editPasswordByAdmin")
+	@RequiresUser
 	@RequiresRoles("member")
-	@RequiresPermissions("member:list") 
+	@RequiresPermissions("member:edit")
+	public ModelAndView editPasswordByAdmin(String mid, String password, HttpServletResponse response) {
+		super.print(response,
+				this.memberServiceBack.editPasswordByAdmin(mid, MyPasswordEncrypt.encryptPassword(password)));
+		return null;
+	}
+
+	@RequestMapping("list")
+	@RequiresUser
+	@RequiresRoles("member")
+	@RequiresPermissions("member:list")
 	public ModelAndView list() {
-		ModelAndView mav = new ModelAndView(super.getValue("back.member.list.page")) ;
-		mav.addObject("allMembers", this.memberServiceBack.list()) ;
-		return mav ; 
+		ModelAndView mav = new ModelAndView(super.getValue("back.member.list.page"));
+		mav.addObject("allMembers", this.memberServiceBack.list());
+		return mav;
 	}
 
 	@RequestMapping("editPassword")
-	@RequiresUser 
+	@RequiresUser
 	public ModelAndView editPassword(String newpassword, String oldpassword) {
 		ModelAndView mav = new ModelAndView(super.getValue("forward.back.page"));
 		// 对接收到的密码进行加密处理
@@ -41,9 +52,9 @@ public class MemberActionBack extends AbstractAction {
 		} else {
 			super.setMsgAndUrl(mav, "back.member.edit.password.failure.msg", "front.index.action");
 		}
-		// super.logout(); 
+		// super.logout();
 		return mav;
-	} 
+	}
 
 	@RequestMapping("editPasswordPre")
 	@RequiresUser

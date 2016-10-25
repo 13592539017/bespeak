@@ -18,16 +18,20 @@ public class ValidationInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		boolean flag = true ;	// 默认放行
-		// 需要取得HandlerMethod对象，这样可以取得相关的Action信息
-		HandlerMethod handlerMethod = (HandlerMethod) handler ;
-		// 表示具体的验证处理操作，所有的错误信息通过Map返回
-		Map<String,String> errors = ValidatorUtils.validate(request, handlerMethod) ;
-		if (errors.size() > 0) {	// 有错
-			request.setAttribute("errors", errors);	// 保存在Request属性范围之中
-			flag = false ;	// 表示现在有错误，无法向下执行
-			request.getRequestDispatcher(ResourceReadUtil.getErrorPageValue(handlerMethod)).forward(request, response);
-		} else {	// 没有错
-			return true ;
+		try {
+			// 需要取得HandlerMethod对象，这样可以取得相关的Action信息
+			HandlerMethod handlerMethod = (HandlerMethod) handler;
+			// 表示具体的验证处理操作，所有的错误信息通过Map返回
+			Map<String, String> errors = ValidatorUtils.validate(request, handlerMethod);
+			if (errors.size() > 0) { // 有错
+				request.setAttribute("errors", errors); // 保存在Request属性范围之中
+				flag = false; // 表示现在有错误，无法向下执行
+				request.getRequestDispatcher(ResourceReadUtil.getErrorPageValue(handlerMethod)).forward(request,
+						response);
+			} else { // 没有错
+				return true;
+			}
+		} catch (Exception e) {
 		}
 		return flag;
 	}

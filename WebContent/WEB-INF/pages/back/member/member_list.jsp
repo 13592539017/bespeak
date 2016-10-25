@@ -81,7 +81,7 @@
 								<div class="form-group" id="passwordDiv">
 									<label class="col-md-2 control-label" for="password">新的密码：</label>
 									<div class="col-md-5">
-										<input type="text" name="password" id="password" class="form-control input-sm" placeholder="请输入雇员真实姓名">
+										<input type="password" name="password" id="password" class="form-control input-sm" placeholder="请输入用户的新密码">
 									</div>
 									<div class="col-md-4" id="passwordMsg">*</div>
 								</div>
