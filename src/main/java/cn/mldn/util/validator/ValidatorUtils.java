@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
@@ -26,10 +27,16 @@ public class ValidatorUtils {
 	 */
 	public static Map<String, String> validate(HttpServletRequest request, HandlerMethod handlerMethod) {
 		// 通过给定的Action名称以及要调用的业务方法“rules”一起拼凑出要取出的验证规则，在Validations.properties中定义
-		String validationKey = handlerMethod.getBean().getClass().getSimpleName() + "."
+		String beanName = handlerMethod.getBean().getClass().getSimpleName() ;
+		try {
+			beanName = beanName.substring(0,beanName.indexOf("$$")) ;
+		} catch (Exception e1) {}
+		String validationKey = beanName + "."
 				+ handlerMethod.getMethod().getName() + ".rules";
+//		log.info("【*** preHandle ***】validationValue = " + validationKey);
+		
+		 
 		Map<String,String> errors = new HashMap<String,String>() ;	// 保存所有的验证信息
-		// log.info("【*** preHandle ***】validationValue = " + validationKey);
 		try {
 			// 现在取得了验证规则的key的信息之后实际上并无法知道该key对应的具体的内容是什么，而内容需要依靠AbstractAction.getValue()取得
 			Method getValueMethod = handlerMethod.getBean().getClass().getMethod("getValue", String.class,

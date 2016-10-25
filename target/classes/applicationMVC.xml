@@ -18,7 +18,7 @@
 		http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 	<mvc:interceptors>		<!-- 定义拦截器栈，可以定义有多个拦截器 -->
 		<mvc:interceptor>	<!-- 定义某一个具体的拦截器 -->
-			<mvc:mapping path="/pages/**/*.action"/>	<!-- 该拦截器针对于所有路径下的action -->
+			<mvc:mapping path="/admin/**/*.action"/>	<!-- 该拦截器针对于所有路径下的action -->
 			<!-- 定义该拦截器使用的拦截器处理程序类，必须是HandlerInterceptor子类 -->
 			<bean class="cn.mldn.util.validate.ValidationInterceptor"/>
 		</mvc:interceptor>

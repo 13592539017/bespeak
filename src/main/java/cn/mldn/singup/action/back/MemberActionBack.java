@@ -30,7 +30,7 @@ public class MemberActionBack extends AbstractAction {
 		} else {
 			super.setMsgAndUrl(mav, "back.member.edit.password.failure.msg", "front.index.action");
 		}
-		super.logout(); 
+		// super.logout(); 
 		return mav;
 	} 
 
