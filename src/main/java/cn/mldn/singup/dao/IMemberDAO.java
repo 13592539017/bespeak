@@ -7,6 +7,16 @@ import cn.mldn.singup.vo.Member;
 
 public interface IMemberDAO {
 	/**
+	 * 进行用户锁定状态的更新操作，锁定状态：<br>
+	 * 1、locked = 0，表示该用户属于活跃用户，不锁定；<br>
+	 * 2、locked = 1，表示该用户被锁定， 无法登录；<br>
+	 * @param params 包含有用户更新所需要的以下参数：<br>
+	 * 1、key = mid、value = 要更新用户的mid；<br>
+	 * 2、key = locked、value = 表示锁定的状态；<br>
+	 * @return
+	 */
+	public boolean doUpdateLocked(Map<String,Object> params) ;
+	/**
 	 * 实现用户密码的变更，但是不会变更超级管理员的密码
 	 * @param params 要进行变更的数据，包含有以下内容：<br>
 	 * key = mid、value = 要修改的用户编号；<br>

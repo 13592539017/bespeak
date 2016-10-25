@@ -7,6 +7,13 @@ import cn.mldn.singup.vo.Member;
 
 public interface IMemberServiceBack {
 	/**
+	 * 实现用户的状态的更新处理，调用IMemberDAO.doUpdateLocked()方法
+	 * @param mid 要更新的用户编号
+	 * @param locked 表示要更新后的状态
+	 * @return
+	 */
+	public boolean editLocked(String mid,int locked) ;
+	/**
 	 * 实现全部用户的列表显示，调用IMemberDAO.findAll()查询
 	 * @return 如果没有数据则集合长度为0（size() == 0） 
 	 */

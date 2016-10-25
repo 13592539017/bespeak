@@ -48,9 +48,9 @@
 								</td>
 								<td><input type="button" id="changeBut-${member.mid}" name="changeBut-${member.mid}" value="修改密码" class="btn btn-xs btn-default"></td>
 								<td><input type="button" id="edit-${member.mid}" name="edit-${member.mid}" value="编辑" class="btn btn-xs btn-primary"></td>
-								<td><input type="button" id="lockBut-${member.mid}-${member.locked}" name="lockBut-${member.mid}-${member.locked}" value="${member.locked==1?'激活用户':'锁定用户'}" class="btn btn-xs ${member.locked==1?'btn-success':'btn-danger'}"></td>
+								<td><input type="button" id="lockBut-${member.mid}" name="lockBut-${member.mid}" locked="${member.locked}" value="${member.locked==1?'激活用户':'锁定用户'}" class="btn btn-xs ${member.locked==1?'btn-success':'btn-danger'}"></td>
 							</tr>
-						</c:forEach>
+						</c:forEach> 
 					</table>
 				</div>
 				<div class="panel-footer" style="height:80px;">

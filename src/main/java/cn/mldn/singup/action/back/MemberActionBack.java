@@ -30,6 +30,16 @@ public class MemberActionBack extends AbstractAction {
 		return null;
 	}
 
+	@RequestMapping("editLocked")
+	@RequiresUser
+	@RequiresRoles("member") 
+	@RequiresPermissions("member:edit")
+	public ModelAndView editLocked(String mid, int locked, HttpServletResponse response) {
+		super.print(response,
+				this.memberServiceBack.editLocked(mid, locked)); 
+		return null;
+	} 
+
 	@RequestMapping("list")
 	@RequiresUser
 	@RequiresRoles("member")

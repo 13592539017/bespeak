@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="cn.mldn.singup.dao.IMemberDAO">
+	<!-- 实现用户的锁定的状态处理 -->
+	<update id="doUpdateLocked" parameterType="java.util.Map">
+		UPDATE member SET locked=#{locked} WHERE mid=#{mid} AND sflag=0 ;
+	</update>
 	<!-- 实现用户密码的变更处理 -->
 	<update id="doUpdatePasswordByAdmin" parameterType="java.util.Map">
 		UPDATE member SET password=#{password} WHERE mid=#{mid} AND sflag=0 ;
