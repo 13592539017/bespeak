@@ -1,5 +1,8 @@
 package cn.mldn.realm;
 
+import java.util.Map;
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
@@ -10,6 +13,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
@@ -22,10 +26,22 @@ public class MemberRealm extends AuthorizingRealm {
 	@Resource
 	private IMemberServiceBack memberServiceBack;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		log.info("********** 2、用户角色与权限：doGetAuthorizationInfo **********");
-		return null;
+		String username = (String) principals.getPrimaryPrincipal() ;	// 取得用户登录名
+		SimpleAuthorizationInfo auth = new SimpleAuthorizationInfo() ;	// 定义授权信息的返回数据
+		try {
+			Map<String,Object> map = this.memberServiceBack.listAuthByMember(username) ;
+			Set<String> allRoles = (Set<String>) map.get("allRoles") ;
+			Set<String> allActions = (Set<String>) map.get("allActions") ;
+			auth.setRoles(allRoles);// 所有的角色必须以Set集合的形式出现
+			auth.setStringPermissions(allActions); 	// 所有的权限必须以Set集合的形式出现
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+		return auth;
 	}
 
 	@Override

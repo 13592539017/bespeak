@@ -8,7 +8,7 @@ import cn.mldn.util.action.AbstractAction;
  
 @Controller
 public class ShiroMemberAction extends AbstractAction {
-	@RequestMapping("/successUrl") 
+	@RequestMapping("/admin/successUrl") 
 	public ModelAndView successUrl() {
 		return new ModelAndView(super.getValue("shiro.successUrl.page"));
 	}

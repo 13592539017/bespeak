@@ -1,11 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-
+<%@include file="/WEB-INF/pages/plugins/include_static_head.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -39,7 +33,7 @@
 						</tr>
 						<tr>
 							<td><strong>总预约数量：</strong></td>
-							<td>20</td>
+							<td>20<shiro:hasRole name="member">xxx</shiro:hasRole></td>
 						</tr>
 						<tr>
 							<td><strong>新的预约：</strong></td>

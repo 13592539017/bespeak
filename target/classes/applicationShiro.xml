@@ -25,7 +25,7 @@
 		<!-- 认证失败之后的跳转路径页面 -->
 		<property name="unauthorizedUrl" value="/unauthUrl.action"/>
 		<!-- 登录成功之后的跳转访问路径 -->
-		<property name="successUrl" value="/successUrl.action"/>
+		<property name="successUrl" value="/admin/successUrl.action"/>
 		<!-- 配置shiro里面需要使用到的过滤器操作 -->
 		<property name="filters">
 			<map>
