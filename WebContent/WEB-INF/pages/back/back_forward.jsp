@@ -1,10 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/pages/plugins/include_static_head.jsp" %>
+<%@include file="/WEB-INF/pages/plugins/include_basepath.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <base href="<%=basePath%>">
 <jsp:include page="/WEB-INF/pages/plugins/include_javascript_head.jsp" />
+<script type="text/javascript" src="js/pages/back/member/member_list.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -15,37 +16,20 @@
 		<div class="content-wrapper">
 			<div class="panel panel-success">
 				<div class="panel-heading">
-					<strong><i class="fa fa-user-md"></i>&nbsp;用户中心</strong>
+					<strong><i class="fa-area-chart"></i>&nbsp;操作完成</strong>
 				</div>
 				<div class="panel-body">
-					<table class="table table-bordered table-hover">
-						<tr>
-							<td colspan="3"><span class="h1"><span class="glyphicon glyphicon-user"></span>&nbsp;欢迎“<shiro:principal/>”光临！</span></td>
-						</tr>
-						<tr>
-							<td rowspan="6" style="width:130px;">
-								<img src="upload/news/nophoto.gif" class="image" style="height:128px;width:128px;">
-							</td>
-						</tr>
-						<tr>
-							<td><strong>总预约数量：</strong></td>
-							<td>20<shiro:hasRole name="member">xxx</shiro:hasRole></td>
-						</tr>
-						<tr>
-							<td><strong>新的预约：</strong></td>
-							<td>20</td>
-						</tr>
-						<tr>
-							<td><strong>未处理预约：</strong></td>
-							<td>20</td>
-						</tr>
-						<tr>
-							<td><strong>已处理预约：</strong></td>
-							<td>20</td>
-						</tr>
-					</table>
+					<div>
+						<div>${msg}</div>
+						<div><span id="mytime">2</span>秒后跳转到<a href="<%=basePath%>${url}">首页</a>！</div>
+					</div>
+					<script type="text/javascript">
+						var goUrl = "<%=basePath%>${url}" ;
+						goTime() ; 
+					</script>
 				</div>
-				<div class="panel-footer">
+				<div class="panel-footer" style="height:80px;">
+					<jsp:include page="/WEB-INF/pages/plugins/include_alert.jsp"/>
 				</div>
 			</div>
 		</div>

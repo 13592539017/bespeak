@@ -118,6 +118,18 @@
 		<servlet-name>KaptchaServlet</servlet-name>
 		<url-pattern>/captcha.jpg</url-pattern>
 	</servlet-mapping>
+	<error-page>
+		<exception-type>
+			org.apache.shiro.authz.UnauthenticatedException
+		</exception-type>
+		<location>/loginUrl.action</location>
+	</error-page>
+	<error-page>
+		<exception-type>
+			org.apache.shiro.authz.UnauthorizedException
+		</exception-type>
+		<location>/unauthUrl.action</location>
+	</error-page> 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>

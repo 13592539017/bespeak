@@ -14,10 +14,22 @@ import org.springframework.context.MessageSource;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.mldn.util.file.UploadFileUtil;
 
 public abstract class AbstractAction {
+	/**
+	 * 设置跳转后所需要的相关的提示信息以及自动跳转路径的内容
+	 * @param mav
+	 * @param msgKey
+	 * @param urlKey
+	 */
+	public void setMsgAndUrl(ModelAndView mav,String msgKey,String urlKey) {
+		mav.addObject("msg", this.getValue(msgKey)) ;
+		mav.addObject("url", this.getValue(urlKey)) ;
+	} 
+	
 	/**
 	 * 专门负责数据的输出，可以输出各种数据，主要用于Ajax处理上
 	 * @param response

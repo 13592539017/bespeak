@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/pages/plugins/include_static_head.jsp"%>
 <header class="main-header">
 
 	<!-- Logo -->
@@ -19,7 +20,7 @@
 				<li class="dropdown user user-menu"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown"> <img
 						src="upload/news/nophoto.gif" class="user-image" alt="User Image">
-						<span class="hidden-xs">李兴华</span>
+						<span class="hidden-xs"><shiro:principal/></span>
 				</a>
 					<ul class="dropdown-menu"> 
 						<!-- User image -->
@@ -36,8 +37,8 @@
 						<li class="user-footer">
 							<div class="text-center">
 								<a href="pages/back/member/member_password.jsp" class="btn btn-warning btn-flat"><i class="fa fa-puzzle-piece"></i>&nbsp;修改密码</a>
-								<a href="#" class="btn btn-danger btn-flat"><i class="fa fa-xing"></i>&nbsp;系统注销</a>
-							</div>
+								<a href="<%=basePath%>/admin/logoutUrl.action" class="btn btn-danger btn-flat"><i class="fa fa-xing"></i>&nbsp;系统注销</a> 
+							 </div>
 						</li>
 					</ul></li>
 				<!-- Control Sidebar Toggle Button -->
