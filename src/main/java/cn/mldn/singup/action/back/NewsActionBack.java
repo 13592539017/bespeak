@@ -37,6 +37,20 @@ public class NewsActionBack extends AbstractAction {
 		return mav;
 	}
 
+	@RequestMapping("listNone")
+	@RequiresRoles("news")
+	@RequiresPermissions("news:list")
+	public ModelAndView listNone(HttpServletRequest request) {
+		SplitPageUtil spu = new SplitPageUtil(request, "title"); // 可以接收到所有的分页数据
+		ModelAndView mav = new ModelAndView(super.getValue("back.news.list.page"));
+		// 进行分页信息的查询
+		Map<String, Object> result = this.newsServiceBack.listNone(spu.getColumn(), spu.getKeyWord(), spu.getCurrentPage(),
+				spu.getLineSize());
+		super.handleSplit(mav, result.get("newsCount"), "公告标题:title|公告摘要:abs", "back.news.listNone.action", spu);
+		mav.addObject("allNews", result.get("allNews")) ; 	// 真正需要进行显示的数据的集合
+		return mav;
+	}	
+	
 	@RequestMapping("addPre")
 	@RequiresRoles("news")
 	@RequiresPermissions("news:add")

@@ -45,7 +45,7 @@
 						<shiro:hasPermission name="member:list">
 							<li class="${param.action=='news:list' ? 'active' : ''}"><a href="<%=basePath%>admin/news/list.action"><i
 									class="fa fa-list-ul"></i> 公告列表</a></li>  
-							<li class="${param.action=='news:unlist' ? 'active' : ''}"><a href="pages/back/news/news_list.jsp?type=unlist"><i
+							<li class="${param.action=='news:unlist' ? 'active' : ''}"><a href="<%=basePath%>admin/news/listNone.action"><i
 									class="fa fa-archive"></i> 公告草稿箱</a></li>
 						</shiro:hasPermission>
 					</ul></li>

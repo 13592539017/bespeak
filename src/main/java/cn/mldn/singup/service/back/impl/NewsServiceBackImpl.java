@@ -24,11 +24,19 @@ public class NewsServiceBackImpl extends AbstractServiceBack implements INewsSer
 	private IDictionaryDAO dictionaryDAO;
 	@Resource
 	private INewsDAO newsDAO;
-	
+	@Override
+	public Map<String, Object> listNone(String column, String keyWord, int currentPage, int lineSize) {
+		Map<String,Object> param = super.handleParams(column, keyWord, currentPage, lineSize) ;
+		param.put("flag", 0) ;	// 业务层上针对于flag进行控制
+		Map<String,Object> result = new HashMap<String,Object>() ;
+		result.put("allNews", this.newsDAO.findAllSplitByFlag(param)) ;
+		result.put("newsCount", this.newsDAO.getAllCountByFlag(param)) ;
+		return result ; 
+	}
+		
 	@Override
 	public Map<String, Object> list(String column, String keyWord, int currentPage, int lineSize) {
 		Map<String,Object> param = super.handleParams(column, keyWord, currentPage, lineSize) ;
-		System.out.println(param);
 		Map<String,Object> result = new HashMap<String,Object>() ;
 		result.put("allNews", this.newsDAO.findAllSplit(param)) ;
 		result.put("newsCount", this.newsDAO.getAllCount(param)) ;

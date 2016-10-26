@@ -23,12 +23,7 @@
 		<div class="content-wrapper">
 			<div class="panel panel-success">
 				<div class="panel-heading">
-					<c:if test="${param.type == 'list' }">
-						<strong><i class="fa fa-list-ul"></i>&nbsp;已发布公告列表</strong>
-					</c:if>
-					<c:if test="${param.type == 'unlist' }">
-						<strong><i class="fa fa-archive"></i>&nbsp;未发布公告列表</strong>
-					</c:if>
+					<strong><i class="fa fa-list-ul"></i>&nbsp;公告列表</strong>
 				</div>
 				<div class="panel-body">
 					<jsp:include page="/WEB-INF/pages/plugins/include_splitpage_search.jsp"/>
