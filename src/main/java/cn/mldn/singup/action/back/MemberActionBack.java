@@ -21,6 +21,31 @@ import cn.mldn.util.encrypt.MyPasswordEncrypt;
 public class MemberActionBack extends AbstractAction {
 	@Resource
 	private IMemberServiceBack memberServiceBack;
+
+	@RequestMapping("editPre")
+	@RequiresUser
+	@RequiresRoles("member") 
+	@RequiresPermissions("member:edit")
+	public ModelAndView editPre(String mid) {
+		ModelAndView mav = new ModelAndView(super.getValue("back.member.edit.page")) ;
+		mav.addAllObjects(this.memberServiceBack.editPre(mid)) ; 
+		return mav;
+	} 	
+	@RequestMapping("edit")
+	@RequiresUser
+	@RequiresRoles("member") 
+	@RequiresPermissions("member:edit")
+	public ModelAndView edit(Member vo,HttpServletRequest request) {
+		// 首先一定要将接收到的密码进行加密
+		vo.setPassword(MyPasswordEncrypt.encryptPassword(vo.getPassword()));
+		ModelAndView mav = new ModelAndView(super.getValue("forward.back.page")) ;
+		if (this.memberServiceBack.edit(vo, super.getSetByInteger(request, "rid"))) {
+			super.setMsgAndUrl(mav, "vo.edit.success.msg", "back.member.list.action");
+		} else {
+			super.setMsgAndUrl(mav, "vo.edit.failure.msg", "back.member.list.action");
+		}
+		return mav;
+	}  
 	
 	@RequestMapping("addPre")
 	@RequiresUser

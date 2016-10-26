@@ -30,6 +30,40 @@ public class MemberServiceBackImpl extends AbstractServiceBack implements IMembe
 	@Resource
 	private IActionDAO actionDAO;
 	
+	
+	@Override
+	@RequiresRoles("member")
+	@RequiresPermissions("member:edit") 
+	public Map<String, Object> editPre(String mid) {
+		Map<String,Object> map = new HashMap<String,Object>() ;
+		map.put("allRoles", this.roleDAO.findAll()) ;
+		map.put("member", this.memberDAO.findById(mid)) ;
+		map.put("memberRoles", this.memberDAO.findAllRoleByMember(mid)) ;
+		return map ; 
+	}
+	@Override
+	@RequiresRoles("member")
+	@RequiresPermissions("member:edit")
+	public boolean edit(Member vo, Set<Integer> rid) {
+		if (this.memberDAO.findById(vo.getMid()) != null) {	// 要修改的用户存在
+			if (this.memberDAO.doUpdate(vo)) {	// 进行用户数据的更新
+				if (this.memberDAO.doRemoveMemberAndRole(vo.getMid())) { // 删除掉已经存在的关系
+					// 随后需要向member_role数据表里面保存有对应的关系数据
+					Iterator<Integer> iter = rid.iterator() ;
+					while (iter.hasNext()) {
+						Map<String,Object> map = new HashMap<String,Object>() ;
+						map.put("mid", vo.getMid()) ;
+						map.put("rid", iter.next()) ;
+						this.memberDAO.doCreateMemberAndRole(map) ;
+					}
+					return true ;
+				}
+			}
+		}
+		return false;
+	} 
+	
+	
 	@Override
 	@RequiresRoles("member")
 	@RequiresPermissions("member:add")

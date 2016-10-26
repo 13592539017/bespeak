@@ -8,7 +8,7 @@
 <script type="text/javascript" src="js/pages/back/member/member_list.js"></script>
 </head>
 <%
-	String editMemberUrl = basePath + "pages/back/member/member_edit.jsp" ;
+	String editMemberUrl = basePath + "admin/member/editPre.action" ;
 %>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -31,7 +31,7 @@
 							<th width="10%">姓名</th>
 							<th width="20%">注册日期</th>
 							<th width="10%">当前状态</th>
-							<th colspan="3" width="20%">操作</th>
+							<th width="20%">操作</th>
 						</tr>
 						<c:forEach items="${allMembers}" var="member">
 							<tr>
@@ -46,9 +46,13 @@
 										<span class="text-danger">锁定</span>
 									</c:if>
 								</td>
-								<td><input type="button" id="changeBut-${member.mid}" name="changeBut-${member.mid}" value="修改密码" class="btn btn-xs btn-default"></td>
-								<td><input type="button" id="edit-${member.mid}" name="edit-${member.mid}" value="编辑" class="btn btn-xs btn-primary"></td>
-								<td><input type="button" id="lockBut-${member.mid}" name="lockBut-${member.mid}" locked="${member.locked}" value="${member.locked==1?'激活用户':'锁定用户'}" class="btn btn-xs ${member.locked==1?'btn-success':'btn-danger'}"></td>
+								<td>
+									<input type="button" id="changeBut-${member.mid}" name="changeBut-${member.mid}" value="修改密码" class="btn btn-xs btn-default">
+										<shiro:hasPermission name="member:edit">
+											<a href="<%=editMemberUrl%>?mid=${member.mid}" id="edit-${member.mid}" name="edit-${member.mid}" class="btn btn-xs btn-primary">编辑</a>
+										</shiro:hasPermission>
+									<input type="button" id="lockBut-${member.mid}" name="lockBut-${member.mid}" locked="${member.locked}" value="${member.locked==1?'激活用户':'锁定用户'}" class="btn btn-xs ${member.locked==1?'btn-success':'btn-danger'}">
+								</td>
 							</tr>
 						</c:forEach> 
 					</table>

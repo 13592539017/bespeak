@@ -2,10 +2,31 @@ package cn.mldn.singup.dao;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import cn.mldn.singup.vo.Member;
 
 public interface IMemberDAO {
+	/**
+	 * 实现用户基本数据的更新处理
+	 * @param vo
+	 * @return
+	 */
+	public boolean doUpdate(Member vo) ;
+	
+	/**
+	 * 取得一个用户对应的所有的角色编号
+	 * @param mid
+	 * @return
+	 */ 
+	public Set<Integer> findAllRoleByMember(String mid) ;
+	/**
+	 * 在更新前先删除掉所有member_role与此用户有关系的数据信息
+	 * @param mid
+	 * @return
+	 */
+	public boolean doRemoveMemberAndRole(String mid) ;
+	
 	/**
 	 * 实现member_role关系表的数据保存
 	 * @param params 包含有两类数据：<br>

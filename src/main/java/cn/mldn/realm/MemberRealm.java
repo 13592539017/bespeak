@@ -54,6 +54,8 @@ public class MemberRealm extends AuthorizingRealm {
 		Member vo =  this.memberServiceBack.get(username);	// 根据后台业务查询用户的完整数据
 		if (vo == null) {
 			throw new UnknownAccountException("该用户名称不存在！");
+		} else if (vo.getLocked() == null || vo.getLocked().equals(1)) {
+			throw new UnknownAccountException("该用户已经被锁定了！");
 		} else { // 进行密码的验证处理
 			String password = MyPasswordEncrypt.encryptPassword(new String((char[]) token.getCredentials()));
 			// 将数据库中的密码与输入的密码进行比较，这样就可以确定当前用户是否可以正常登录
