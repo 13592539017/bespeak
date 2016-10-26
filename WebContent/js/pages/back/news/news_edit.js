@@ -1,5 +1,5 @@
 $(function(){
-	tinymce.init({ selector:'#note' });
+	tinymce.init({ selector:'#content' });
 	$("#myform").validate({
 		debug : true, // 取消表单的提交操作
 		submitHandler : function(form) {
@@ -16,6 +16,11 @@ $(function(){
 
 			})
 		},
+		messages : {
+			"title" : {
+				remote : "该新闻标题已存在，无法使用，请更换！"
+			}
+		} ,
 		unhighlight : function(element, errorClass) {
 			$(element).fadeOut(1,function() {
 				$(element).fadeIn(1,function() {
@@ -26,21 +31,41 @@ $(function(){
 		errorClass : "text-danger",
 		rules : {
 			"title" : {
-				required : true 
+				required : true ,
+				remote : {
+					url : "admin/news/checkNidAndTitle.action", // 后台处理程序
+					type : "post", // 数据发送方式
+					dataType : "html", // 接受数据格式
+					data : { // 要传递的数据
+						title : function() {
+							return $("#title").val();
+						} ,
+						nid : function() {
+							return $("#nid").val();
+						}
+					},
+					dataFilter : function(data, type) {
+						if (data.trim() == "true") {
+							return true;
+						} else {  
+							return false;
+						}
+					}
+				}
 			},
 			"abs" : { 
 				required : true
 			},
-			"type" : { 
+			"dtid" : { 
 				required : true
 			} ,
 			"pic" : { 
 				extension : "png|jpg|gif|bmp" 
 			} ,
-			"note" : { 
+			"content" : { 
 				required : true
 			} ,
-			"status" : { 
+			"flag" : { 
 				required : true
 			}
 		}

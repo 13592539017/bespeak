@@ -51,6 +51,40 @@ public class NewsActionBack extends AbstractAction {
 		return mav;
 	}	
 	
+	@RequestMapping("editPre")
+	@RequiresRoles("news")
+	@RequiresPermissions("news:edit")
+	public ModelAndView editPre(int nid) {
+		ModelAndView mav = new ModelAndView(super.getValue("back.news.edit.page"));
+		mav.addAllObjects(this.newsServiceBack.editPre(nid));
+		return mav;
+	}
+
+	@RequestMapping("edit")
+	@RequiresRoles("news")
+	@RequiresPermissions("news:edit")
+	public ModelAndView edit(News vo, MultipartFile pic, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView(super.getValue("forward.back.page"));
+		if (pic != null) {
+			if (pic.getSize() > 0) {	// 现在有图片上传
+				if ("nophoto.gif".equals(vo.getPhoto())) {	// 原始没有图片名称
+					vo.setPhoto(super.createFileName(pic)); // 创建新的图片名称
+				}
+			}
+			vo.setMid(super.getMid()); // 设置进行新闻创建的管理员信息
+		}
+		if (this.newsServiceBack.edit(vo)) {
+			if (pic != null && pic.getSize() > 0 ) {
+				super.saveFile(pic, vo.getPhoto(), request); // 图片保存
+			}
+			super.setMsgAndUrl(mav, "vo.edit.success.msg", "back.news.list.action");
+		} else {
+			super.setMsgAndUrl(mav, "vo.edit.failure.msg", "back.news.list.action");
+		}
+		return mav;
+	}	 
+	
+	
 	@RequestMapping("addPre")
 	@RequiresRoles("news")
 	@RequiresPermissions("news:add")
@@ -66,15 +100,23 @@ public class NewsActionBack extends AbstractAction {
 	public ModelAndView add(News vo, MultipartFile pic, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView(super.getValue("forward.back.page"));
 		if (pic != null) {
-			String fileName = super.createFileName(pic); // 需要创建一个名称
-			vo.setMid(super.getMid()); // 设置进行新闻创建的管理员信息
-			vo.setPhoto(fileName); // 保存生成的图片名称
-			if (this.newsServiceBack.add(vo)) {
-				super.saveFile(pic, fileName, request); // 图片保存
-				super.setMsgAndUrl(mav, "vo.add.success.msg", "back.news.add.action");
+			if (pic.getSize() > 0) {
+				String fileName = super.createFileName(pic); // 需要创建一个名称
+				vo.setPhoto(fileName); // 保存生成的图片名称
 			} else {
-				super.setMsgAndUrl(mav, "vo.add.failure.msg", "back.news.add.action");
+				vo.setPhoto("nophoto.gif"); // 保存生成的图片名称
 			}
+			vo.setMid(super.getMid()); // 设置进行新闻创建的管理员信息
+		}
+		if (this.newsServiceBack.add(vo)) {
+			if (pic != null) {
+				if (pic.getSize() > 0) {
+						super.saveFile(pic, vo.getPhoto(), request); // 图片保存
+				}
+			}
+			super.setMsgAndUrl(mav, "vo.add.success.msg", "back.news.add.action");
+		} else {
+			super.setMsgAndUrl(mav, "vo.add.failure.msg", "back.news.add.action");
 		}
 		return mav;
 	}
@@ -87,6 +129,19 @@ public class NewsActionBack extends AbstractAction {
 		return null;
 	}
 
+	@RequestMapping("checkNidAndTitle")
+	@RequiresRoles("news")
+	@RequiresPermissions("news:edit")
+	public ModelAndView checkNidAndTitle(int nid,String title, HttpServletResponse response) {
+		News vo = this.newsServiceBack.getByTitle(title) ;	// 根据title取得vo对象
+		if (vo == null) {
+			super.print(response, true);
+		} else {
+			super.print(response, vo.getNid().equals(nid));
+		} 
+		return null;
+	}
+	
 	@Override
 	public String getType() {
 		return "公告";

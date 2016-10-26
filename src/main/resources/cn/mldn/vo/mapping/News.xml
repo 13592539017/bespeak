@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="cn.mldn.singup.dao.INewsDAO">
+
+	<select id="findById" parameterType="Integer" resultType="News">
+		SELECT nid,dtid,mid,title,abs,content,photo,pubdate,flag   
+		FROM news WHERE nid=#{nid}
+	</select>
+	<insert id="doUpdate" parameterType="News">
+		UPDATE news SET dtid=#{dtid},mid=#{mid},title=#{title},abs=#{abs},content=#{content},photo=#{photo},flag=#{flag}
+		WHERE nid=#{nid}
+	</insert>
+
 	<select id="findAllSplitByFlag" parameterType="java.util.Map" resultType="News">
 		SELECT nid,dtid,mid,title,abs,content,photo,pubdate,flag
 		FROM news 

@@ -7,6 +7,20 @@ import cn.mldn.singup.vo.News;
 
 public interface INewsDAO {
 	/**
+	 * 公告信息的更新处理
+	 * @param vo
+	 * @return
+	 */
+	public boolean doUpdate(News vo) ;
+	
+	/**
+	 * 根据编号查询一个公告的完整信息
+	 * @param nid 公告编号
+	 * @return
+	 */
+	public News findById(Integer nid) ;
+	
+	/**
 	 * 实现分页的数据列表，处理的时候采用动态SQL，如果没有column或keyWord表示查询全部
 	 * @param params 包含有如下的几个参数：<br>
 	 * 1、key = column、value = 模糊查询的数据列；<br>

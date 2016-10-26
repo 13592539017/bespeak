@@ -1,5 +1,5 @@
 $(function(){
-	tinymce.init({ selector:'#note' });
+	tinymce.init({ selector:'#content' });
 	$("#myform").validate({
 		debug : true, // 取消表单的提交操作
 		submitHandler : function(form) {

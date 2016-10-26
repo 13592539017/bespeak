@@ -24,6 +24,29 @@ public class NewsServiceBackImpl extends AbstractServiceBack implements INewsSer
 	private IDictionaryDAO dictionaryDAO;
 	@Resource
 	private INewsDAO newsDAO;
+	
+	@Override
+	@RequiresRoles("news")
+	@RequiresPermissions("news:edit")
+	public boolean edit(News vo) {
+		News oldNews = this.newsDAO.findByTitle(vo.getTitle()) ;
+		if (oldNews != null) {	// 该标题存在，可以使用
+			if (!vo.getNid().equals(oldNews.getNid())) {	// 新闻编号不同
+				return false ;
+			}
+		}
+		return this.newsDAO.doUpdate(vo) ;
+	}
+	@Override
+	@RequiresRoles("news")
+	@RequiresPermissions("news:edit")
+	public Map<String, Object> editPre(int nid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("allNewsType", this.dictionaryDAO.findAllByItem("news")) ;
+		map.put("news", this.newsDAO.findById(nid)) ;
+		return map;
+	}
+	
 	@Override
 	public Map<String, Object> listNone(String column, String keyWord, int currentPage, int lineSize) {
 		Map<String,Object> param = super.handleParams(column, keyWord, currentPage, lineSize) ;

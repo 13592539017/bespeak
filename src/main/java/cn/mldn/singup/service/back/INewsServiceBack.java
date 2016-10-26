@@ -5,6 +5,25 @@ import java.util.Map;
 import cn.mldn.singup.vo.News;
 
 public interface INewsServiceBack {
+	
+	/**
+	 * 实现新闻数据的保存处理，调用如下的操作：<br>
+	 * 1、需要判断现在的title数据是否存在；
+	 * 2、如果title数据不存在，则可以使用INewsDAO.doUpdate()方法进行数据更新；
+	 * @param vo
+	 * @return
+	 */
+	public boolean edit(News vo) ;
+	/**
+	 * 在进行新闻增加前数据查询处理，要查询如下内容：<br>
+	 * 1、要知道所有的新闻数据分类，查询：IDictionaryDAO.findAllByItem()方法；<br>
+	 * 2、根据新闻编号查询新闻的完整数据，调用INewsDAO.findById()方法；<br>
+	 * @return 返回的内容包含有如下数据：<br>
+	 * 1、key = allNewsType、value = IDictionaryDAO.findAllByItem("news")<br>
+	 * 2、key = news、value = INewsDAO.findById()<br>
+	 */
+	public Map<String,Object> editPre(int nid) ;
+	
 	/**
 	 * 实现数据的分页查询操作，需要进行如下的查询：<br>
 	 * 1、调用INewsDAO.findAllSplit()方法查询出具体的数据内容；<br>

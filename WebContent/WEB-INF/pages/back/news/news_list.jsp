@@ -5,8 +5,8 @@
 <head>
 <base href="<%=basePath%>">
 <%
-	String addNewsUrl = basePath + "pages/back/news/news_add.jsp" ;
-	String editNewsUrl = basePath + "pages/back/news/news_edit.jsp" ;
+	String addNewsUrl = basePath + "admin/news/addPre.action" ;
+	String editNewsUrl = basePath + "admin/news/editPre.action" ;
 %>
 <jsp:include page="/WEB-INF/pages/plugins/include_javascript_head.jsp" />
 <script type="text/javascript" src="js/pages/back/news/news_list.js"></script>
