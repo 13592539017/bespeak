@@ -89,7 +89,7 @@ public abstract class AbstractAction {
 	 */
 	public String createFileName(MultipartFile photo) {
 		if (photo.isEmpty()) { // 没有文件上传
-			return "nophoto.png"; // 默认没有文件
+			return "nophoto.gif"; // 默认没有文件
 		} else { // 需要自己生成一个文件
 			return UploadFileUtil.createFileName(photo.getContentType());
 		}

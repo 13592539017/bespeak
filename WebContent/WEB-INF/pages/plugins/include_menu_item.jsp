@@ -39,8 +39,8 @@
 				</a>
 					<ul class="treeview-menu">
 						<shiro:hasPermission name="news:add">
-							<li class="${param.action=='news:add' ? 'active' : ''}"><a href="pages/back/news/news_add.jsp"><i
-									class="fa fa-plus-circle"></i> 发布公告</a></li>
+							<li class="${param.action=='news:add' ? 'active' : ''}"><a href="<%=basePath%>admin/news/addPre.action"><i
+									class="fa fa-plus-circle"></i> 发布公告</a></li> 
 						</shiro:hasPermission>
 						<shiro:hasPermission name="member:list">
 							<li class="${param.action=='news:list' ? 'active' : ''}"><a href="pages/back/news/news_list.jsp?type=list"><i
