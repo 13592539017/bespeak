@@ -7,6 +7,21 @@ import cn.mldn.singup.vo.Member;
 
 public interface IMemberDAO {
 	/**
+	 * 实现member_role关系表的数据保存
+	 * @param params 包含有两类数据：<br>
+	 * 1、key = mid、value = 用户id；<br>
+	 * 2、key = rid、value = 角色id；<br>
+	 * @return
+	 */
+	public boolean doCreateMemberAndRole(Map<String,Object> params) ;
+	
+	/**
+	 * 实现用户的追加处理，所有的追加用户的锁定状态都应该是活跃
+	 * @param vo
+	 * @return
+	 */
+	public boolean doCreate(Member vo) ;
+	/**
 	 * 进行用户锁定状态的更新操作，锁定状态：<br>
 	 * 1、locked = 0，表示该用户属于活跃用户，不锁定；<br>
 	 * 2、locked = 1，表示该用户被锁定， 无法登录；<br>

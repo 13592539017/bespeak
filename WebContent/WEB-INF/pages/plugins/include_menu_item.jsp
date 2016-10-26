@@ -24,8 +24,8 @@
 				</a>
 					<ul class="treeview-menu"> 
 						<shiro:hasPermission name="member:add">
-							<li class="${param.action=='member:add' ? 'active' : ''}"><a href="pages/back/member/member_add.jsp"><i class="fa fa-plus-square"></i>
-									增加用户</a></li>
+							<li class="${param.action=='member:add' ? 'active' : ''}"><a href="<%=basePath%>admin/member/addPre.action"><i class="fa fa-plus-square"></i>
+									增加用户</a></li> 
 						</shiro:hasPermission>
 						<shiro:hasPermission name="member:list">   
 							<li class="${param.action=='member:list' ? 'active' : ''}"><a href="<%=basePath%>admin/member/list.action"><i class="fa fa-list-alt"></i>

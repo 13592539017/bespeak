@@ -3,7 +3,9 @@ package cn.mldn.util.action;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,23 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.mldn.util.file.UploadFileUtil;
 
 public abstract class AbstractAction {
+	/**
+	 * 根据指定的参数接收一组数据
+	 * @param request
+	 * @param param
+	 * @return
+	 */
+	public Set<Integer> getSetByInteger(HttpServletRequest request,String param) {
+		Set<Integer> all = new HashSet<Integer>() ;
+		String values [] = request.getParameterValues(param) ;
+		for (int x = 0 ; x < values.length ; x ++) {
+			if (values[x].matches("\\d+")) {
+				all.add(Integer.parseInt(values[x])) ;
+			}
+		}
+		return all ;
+	} 
+	
 	/**
 	 * 取得当前登录的用户ID数据
 	 * @return
@@ -41,7 +60,11 @@ public abstract class AbstractAction {
 	 * @param urlKey
 	 */
 	public void setMsgAndUrl(ModelAndView mav,String msgKey,String urlKey) {
-		mav.addObject("msg", this.getValue(msgKey)) ;
+		if (this.getType() == null) {
+			mav.addObject("msg", this.getValue(msgKey)) ;
+		} else {
+			mav.addObject("msg", this.getValue(msgKey,this.getType())) ;
+		}
 		mav.addObject("url", this.getValue(urlKey)) ;
 	} 
 	
@@ -71,6 +94,11 @@ public abstract class AbstractAction {
 			return UploadFileUtil.createFileName(photo.getContentType());
 		}
 	}
+	/**
+	 * 取得要操作数据的标记
+	 * @return
+	 */
+	public abstract String getType() ;
 
 	/**
 	 * 进行文件的保存处理

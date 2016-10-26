@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="cn.mldn.singup.dao.IMemberDAO">
+	<insert id="doCreateMemberAndRole" parameterType="java.util.Map">
+		INSERT INTO member_role (mid,rid) VALUES (#{mid},#{rid}) ;
+	</insert>
+
+	<insert id="doCreate" parameterType="Member">
+		INSERT INTO member (mid,password,name,sflag,regdate,locked)
+		VALUES (#{mid},#{password},#{name},#{sflag},#{regdate},#{locked}) ;
+	</insert>
 	<!-- 实现用户的锁定的状态处理 -->
 	<update id="doUpdateLocked" parameterType="java.util.Map">
 		UPDATE member SET locked=#{locked} WHERE mid=#{mid} AND sflag=0 ;

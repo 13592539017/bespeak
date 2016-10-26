@@ -25,5 +25,10 @@ public class IndexAction extends AbstractAction {
 	public String getFileUploadDir() {
 		return null;
 	}
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

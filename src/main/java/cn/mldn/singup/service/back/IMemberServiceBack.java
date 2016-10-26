@@ -2,10 +2,29 @@ package cn.mldn.singup.service.back;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import cn.mldn.singup.vo.Member;
 
 public interface IMemberServiceBack {
+	/**
+	 * 进行增加前数据查询的操作，本操作将执行如下调用：<br>
+	 * 1、调用IRoleDAO.findAll()取得全部的角色信息；<br>
+	 * @return 返回的内容包含有如下组成：<br>
+	 * 1、key = allRoles、value = 全部的角色；<br>
+	 */
+	public Map<String,Object> addPre() ;
+	/**
+	 * 描述数据追加的操作处理，本操作将执行如下调用：<br>
+	 * 1、查询要追加的mid的数据是否存在，调用IMemberDAO.findById()方法；<br>
+	 * 2、调用IMemberDAO.doCreate()保存用户信息；<br>
+	 * 3、调用IMemberDAO.doCreateMemberAndRole()保存用户和角色的关系；<br>
+	 * @param vo
+	 * @param rid 包括要追加的rid数据
+	 * @return 用户保存成功返回true，否则返回false
+	 */
+	public boolean add(Member vo, Set<Integer> rid);
+	
 	/**
 	 * 实现用户的状态的更新处理，调用IMemberDAO.doUpdateLocked()方法
 	 * @param mid 要更新的用户编号

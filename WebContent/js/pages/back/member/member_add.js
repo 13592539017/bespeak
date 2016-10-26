@@ -22,10 +22,32 @@ $(function() {
 				});
 			})
 		},
+		messages : {
+			"mid" : {
+				remote : "该用户id已经存在，无法使用！"
+			}
+		} ,
 		errorClass : "text-danger",
 		rules : {
 			"mid" : {
-				required : true 
+				required : true ,
+				remote : {
+					url : "admin/member/checkMid.action", // 后台处理程序
+					type : "post", // 数据发送方式
+					dataType : "html", // 接受数据格式
+					data : { // 要传递的数据
+						mid : function() {
+							return $("#mid").val();
+						}
+					},
+					dataFilter : function(data, type) {
+						if (data.trim() == "true") {
+							return true;
+						} else { 
+							return false;
+						}
+					}
+				}
 			},
 			"name" : { 
 				required : true

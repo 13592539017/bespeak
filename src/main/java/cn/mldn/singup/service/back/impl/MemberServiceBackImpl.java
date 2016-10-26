@@ -1,8 +1,11 @@
 package cn.mldn.singup.service.back.impl;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -26,6 +29,39 @@ public class MemberServiceBackImpl extends AbstractServiceBack implements IMembe
 	private IRoleDAO roleDAO;
 	@Resource
 	private IActionDAO actionDAO;
+	
+	@Override
+	@RequiresRoles("member")
+	@RequiresPermissions("member:add")
+	public boolean add(Member vo, Set<Integer> rid) {
+		if (this.memberDAO.findById(vo.getMid()) == null) {	// 当前要追加的用户id不存在
+			vo.setRegdate(new Date()); 	// 用户的创建日期为今天
+			vo.setSflag(0); 	// 创建的都是普通管理员
+			vo.setLocked(0); 	// 新创建的管理员不可能被锁定
+			if (this.memberDAO.doCreate(vo)) {	// 现在已经保存了用户的信息
+				// 随后需要向member_role数据表里面保存有对应的关系数据
+				Iterator<Integer> iter = rid.iterator() ;
+				while (iter.hasNext()) {
+					Map<String,Object> map = new HashMap<String,Object>() ;
+					map.put("mid", vo.getMid()) ;
+					map.put("rid", iter.next()) ;
+					this.memberDAO.doCreateMemberAndRole(map) ;
+				}
+				return true ;
+			}
+		}
+		return false;
+	} 
+	@Override
+	@RequiresRoles("member")
+	@RequiresPermissions("member:add") 
+	public Map<String, Object> addPre() {
+		Map<String,Object> map = new HashMap<String,Object>() ;
+		map.put("allRoles", this.roleDAO.findAll()) ;
+		return map ; 
+	}
+	
+	
 	@RequiresRoles("member")
 	@RequiresPermissions("member:edit") 
 	@Override

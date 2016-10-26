@@ -1,6 +1,7 @@
 package cn.mldn.singup.action.back;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.mldn.singup.service.back.IMemberServiceBack;
+import cn.mldn.singup.vo.Member;
 import cn.mldn.util.action.AbstractAction;
 import cn.mldn.util.encrypt.MyPasswordEncrypt;
 
@@ -19,6 +21,41 @@ import cn.mldn.util.encrypt.MyPasswordEncrypt;
 public class MemberActionBack extends AbstractAction {
 	@Resource
 	private IMemberServiceBack memberServiceBack;
+	
+	@RequestMapping("addPre")
+	@RequiresUser
+	@RequiresRoles("member") 
+	@RequiresPermissions("member:add")
+	public ModelAndView addPre() {
+		ModelAndView mav = new ModelAndView(super.getValue("back.member.add.page")) ;
+		mav.addAllObjects(this.memberServiceBack.addPre()) ; 
+		return mav;
+	} 
+	@RequestMapping("add")
+	@RequiresUser
+	@RequiresRoles("member") 
+	@RequiresPermissions("member:add")
+	public ModelAndView add(Member vo,HttpServletRequest request) {
+		// 首先一定要将接收到的密码进行加密
+		vo.setPassword(MyPasswordEncrypt.encryptPassword(vo.getPassword()));
+		ModelAndView mav = new ModelAndView(super.getValue("forward.back.page")) ;
+		if (this.memberServiceBack.add(vo, super.getSetByInteger(request, "rid"))) {
+			super.setMsgAndUrl(mav, "vo.add.success.msg", "back.member.add.action");
+		} else {
+			super.setMsgAndUrl(mav, "vo.add.failure.msg", "back.member.add.action");
+		}
+		return mav;
+	} 
+	@RequestMapping("checkMid") 
+	@RequiresUser
+	public ModelAndView checkMid(String mid,HttpServletResponse response) {
+		if (mid == null || "".equals(mid)) {
+			super.print(response, false);
+		} else {
+			super.print(response, this.memberServiceBack.get(mid) == null);
+		}
+		return null ; 
+	}
 
 	@RequestMapping("editPasswordByAdmin")
 	@RequiresUser
@@ -75,6 +112,10 @@ public class MemberActionBack extends AbstractAction {
 	@Override
 	public String getFileUploadDir() {
 		return null;
+	}
+	@Override
+	public String getType() {
+		return "用户";
 	}
 
 }
