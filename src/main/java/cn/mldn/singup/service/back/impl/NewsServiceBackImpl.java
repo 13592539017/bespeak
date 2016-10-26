@@ -3,6 +3,8 @@ package cn.mldn.singup.service.back.impl;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -22,6 +24,17 @@ public class NewsServiceBackImpl extends AbstractServiceBack implements INewsSer
 	private IDictionaryDAO dictionaryDAO;
 	@Resource
 	private INewsDAO newsDAO;
+	
+	@Override
+	public Map<String, Object> list(String column, String keyWord, int currentPage, int lineSize) {
+		Map<String,Object> param = super.handleParams(column, keyWord, currentPage, lineSize) ;
+		System.out.println(param);
+		Map<String,Object> result = new HashMap<String,Object>() ;
+		result.put("allNews", this.newsDAO.findAllSplit(param)) ;
+		result.put("newsCount", this.newsDAO.getAllCount(param)) ;
+		return result ; 
+	}
+	
 	@Override
 	@RequiresRoles("news")
 	@RequiresPermissions("news:add")

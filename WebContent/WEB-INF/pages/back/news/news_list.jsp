@@ -41,14 +41,23 @@
 							<th width="10%" class="text-center">发布状态</th>
 							<th width="5%" class="text-center">操作</th>
 						</tr>
-						<tr>
-							<td class="text-center"><input type="checkbox" id="nid" name="nid" value="1"></td>
-							<td class="text-center">我们要一起面对困难</td>
-							<td class="text-center">admin</td>
-							<td class="text-center">2019-10-10</td>
-							<td class="text-center">已发布</td>
-							<td class="text-center"><a href="<%=editNewsUrl%>" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</a></td>
-						</tr>
+						<c:forEach items="${allNews}" var="news">
+							<tr>
+								<td class="text-center"><input type="checkbox" id="nid" name="nid" value="${news.nid}"></td>
+								<td class="text-center">${news.title}</td>
+								<td class="text-center">${news.mid}</td>
+								<td class="text-center"><fmt:formatDate value="${news.pubdate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td class="text-center">
+									<c:if test="${news.flag == 0}">
+										<span class="text-danger">未发布</span>
+									</c:if>
+									<c:if test="${news.flag == 1}">
+										<span class="text-success">已发布</span>
+									</c:if>
+								</td>
+								<td class="text-center"><a href="<%=editNewsUrl%>?nid=${news.nid}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</a></td>
+							</tr>
+						</c:forEach>
 					</table>
 					<a href="<%=addNewsUrl%>" id="addBtn" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;发布公告</a>
 					<button id="removeBtn" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-remove"></span>&nbsp;删除公告</button>

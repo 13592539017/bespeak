@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="cn.mldn.singup.dao.INewsDAO">
+	<select id="findAllSplit" parameterType="java.util.Map" resultType="News">
+		SELECT nid,dtid,mid,title,abs,content,photo,pubdate,flag
+		FROM news 
+		<where>
+			<if test="column != null and keyWord != null">
+				${column} LIKE #{keyWord}
+			</if>
+		</where>
+		ORDER BY pubdate DESC  
+		LIMIT #{start},#{lineSize} ;
+	</select>
+	<select id="getAllCount" parameterType="java.util.Map" resultType="Integer">
+		SELECT COUNT(*) FROM news
+		<where>
+			<if test="column != null and keyWord != null">
+				${column} LIKE #{keyWord}
+			</if>
+		</where>
+	</select> 
 	<select id="findByTitle" parameterType="String" resultType="News">
 		SELECT nid,dtid,mid,title,abs,content,photo,pubdate,flag   
 		FROM news WHERE title=#{title}

@@ -43,8 +43,8 @@
 									class="fa fa-plus-circle"></i> 发布公告</a></li> 
 						</shiro:hasPermission>
 						<shiro:hasPermission name="member:list">
-							<li class="${param.action=='news:list' ? 'active' : ''}"><a href="pages/back/news/news_list.jsp?type=list"><i
-									class="fa fa-list-ul"></i> 公告列表</a></li>
+							<li class="${param.action=='news:list' ? 'active' : ''}"><a href="<%=basePath%>admin/news/list.action"><i
+									class="fa fa-list-ul"></i> 公告列表</a></li>  
 							<li class="${param.action=='news:unlist' ? 'active' : ''}"><a href="pages/back/news/news_list.jsp?type=unlist"><i
 									class="fa fa-archive"></i> 公告草稿箱</a></li>
 						</shiro:hasPermission>
