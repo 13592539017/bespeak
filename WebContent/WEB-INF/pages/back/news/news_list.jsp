@@ -37,7 +37,7 @@
 							<th width="5%" class="text-center">操作</th>
 						</tr>
 						<c:forEach items="${allNews}" var="news">
-							<tr>
+							<tr id="tr-${news.nid}">
 								<td class="text-center"><input type="checkbox" id="nid" name="nid" value="${news.nid}"></td>
 								<td class="text-center">${news.title}</td>
 								<td class="text-center">${news.mid}</td>

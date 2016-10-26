@@ -24,7 +24,15 @@ public class NewsServiceBackImpl extends AbstractServiceBack implements INewsSer
 	private IDictionaryDAO dictionaryDAO;
 	@Resource
 	private INewsDAO newsDAO;
-	
+	@Override
+	@RequiresRoles("news")
+	@RequiresPermissions("news:edit")
+	public boolean remove(Set<Integer> ids) {
+		if (ids == null || ids.size() == 0) {
+			return false ;
+		}
+		return this.newsDAO.doRemove(ids.toArray()); 
+	} 
 	@Override
 	@RequiresRoles("news")
 	@RequiresPermissions("news:edit")

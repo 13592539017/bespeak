@@ -23,6 +23,7 @@ import cn.mldn.util.split.SplitPageUtil;
 public class NewsActionBack extends AbstractAction {
 	@Resource
 	private INewsServiceBack newsServiceBack;
+
 	@RequestMapping("list")
 	@RequiresRoles("news")
 	@RequiresPermissions("news:list")
@@ -33,7 +34,7 @@ public class NewsActionBack extends AbstractAction {
 		Map<String, Object> result = this.newsServiceBack.list(spu.getColumn(), spu.getKeyWord(), spu.getCurrentPage(),
 				spu.getLineSize());
 		super.handleSplit(mav, result.get("newsCount"), "公告标题:title|公告摘要:abs", "back.news.list.action", spu);
-		mav.addObject("allNews", result.get("allNews")) ; 	// 真正需要进行显示的数据的集合
+		mav.addObject("allNews", result.get("allNews")); // 真正需要进行显示的数据的集合
 		return mav;
 	}
 
@@ -44,13 +45,13 @@ public class NewsActionBack extends AbstractAction {
 		SplitPageUtil spu = new SplitPageUtil(request, "title"); // 可以接收到所有的分页数据
 		ModelAndView mav = new ModelAndView(super.getValue("back.news.list.page"));
 		// 进行分页信息的查询
-		Map<String, Object> result = this.newsServiceBack.listNone(spu.getColumn(), spu.getKeyWord(), spu.getCurrentPage(),
-				spu.getLineSize());
+		Map<String, Object> result = this.newsServiceBack.listNone(spu.getColumn(), spu.getKeyWord(),
+				spu.getCurrentPage(), spu.getLineSize());
 		super.handleSplit(mav, result.get("newsCount"), "公告标题:title|公告摘要:abs", "back.news.listNone.action", spu);
-		mav.addObject("allNews", result.get("allNews")) ; 	// 真正需要进行显示的数据的集合
+		mav.addObject("allNews", result.get("allNews")); // 真正需要进行显示的数据的集合
 		return mav;
-	}	
-	
+	}
+
 	@RequestMapping("editPre")
 	@RequiresRoles("news")
 	@RequiresPermissions("news:edit")
@@ -59,6 +60,13 @@ public class NewsActionBack extends AbstractAction {
 		mav.addAllObjects(this.newsServiceBack.editPre(nid));
 		return mav;
 	}
+	@RequestMapping("remove")
+	@RequiresRoles("news")
+	@RequiresPermissions("news:edit")
+	public ModelAndView remove(HttpServletRequest request, HttpServletResponse response) {
+		super.print(response, this.newsServiceBack.remove(super.getBatchIds(request)));
+		return null;
+	}  
 
 	@RequestMapping("edit")
 	@RequiresRoles("news")
@@ -66,15 +74,15 @@ public class NewsActionBack extends AbstractAction {
 	public ModelAndView edit(News vo, MultipartFile pic, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView(super.getValue("forward.back.page"));
 		if (pic != null) {
-			if (pic.getSize() > 0) {	// 现在有图片上传
-				if ("nophoto.gif".equals(vo.getPhoto())) {	// 原始没有图片名称
+			if (pic.getSize() > 0) { // 现在有图片上传
+				if ("nophoto.gif".equals(vo.getPhoto())) { // 原始没有图片名称
 					vo.setPhoto(super.createFileName(pic)); // 创建新的图片名称
 				}
 			}
 			vo.setMid(super.getMid()); // 设置进行新闻创建的管理员信息
 		}
 		if (this.newsServiceBack.edit(vo)) {
-			if (pic != null && pic.getSize() > 0 ) {
+			if (pic != null && pic.getSize() > 0) {
 				super.saveFile(pic, vo.getPhoto(), request); // 图片保存
 			}
 			super.setMsgAndUrl(mav, "vo.edit.success.msg", "back.news.list.action");
@@ -82,9 +90,8 @@ public class NewsActionBack extends AbstractAction {
 			super.setMsgAndUrl(mav, "vo.edit.failure.msg", "back.news.list.action");
 		}
 		return mav;
-	}	 
-	
-	
+	}
+
 	@RequestMapping("addPre")
 	@RequiresRoles("news")
 	@RequiresPermissions("news:add")
@@ -111,7 +118,7 @@ public class NewsActionBack extends AbstractAction {
 		if (this.newsServiceBack.add(vo)) {
 			if (pic != null) {
 				if (pic.getSize() > 0) {
-						super.saveFile(pic, vo.getPhoto(), request); // 图片保存
+					super.saveFile(pic, vo.getPhoto(), request); // 图片保存
 				}
 			}
 			super.setMsgAndUrl(mav, "vo.add.success.msg", "back.news.add.action");
@@ -132,16 +139,16 @@ public class NewsActionBack extends AbstractAction {
 	@RequestMapping("checkNidAndTitle")
 	@RequiresRoles("news")
 	@RequiresPermissions("news:edit")
-	public ModelAndView checkNidAndTitle(int nid,String title, HttpServletResponse response) {
-		News vo = this.newsServiceBack.getByTitle(title) ;	// 根据title取得vo对象
+	public ModelAndView checkNidAndTitle(int nid, String title, HttpServletResponse response) {
+		News vo = this.newsServiceBack.getByTitle(title); // 根据title取得vo对象
 		if (vo == null) {
 			super.print(response, true);
 		} else {
 			super.print(response, vo.getNid().equals(nid));
-		} 
+		}
 		return null;
 	}
-	
+
 	@Override
 	public String getType() {
 		return "公告";

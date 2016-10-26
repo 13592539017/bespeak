@@ -3,6 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="cn.mldn.singup.dao.INewsDAO">
 
+	<update id="doRemove" parameterType="Integer">
+		UPDATE news SET flag=2 
+		<where>
+			nid IN 
+			<foreach collection="array" open="(" close=")" separator="," item="ele">
+				#{ele}
+			</foreach>
+		</where>
+	</update>
+
 	<select id="findById" parameterType="Integer" resultType="News">
 		SELECT nid,dtid,mid,title,abs,content,photo,pubdate,flag   
 		FROM news WHERE nid=#{nid}
@@ -51,8 +61,9 @@
 		SELECT COUNT(*) FROM news
 		<where>
 			<if test="column != null and keyWord != null">
-				${column} LIKE #{keyWord}
+				${column} LIKE #{keyWord} AND
 			</if>
+			flag &lt; 2
 		</where>
 	</select> 
 	<select id="findByTitle" parameterType="String" resultType="News">

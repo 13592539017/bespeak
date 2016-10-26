@@ -1,10 +1,17 @@
 package cn.mldn.singup.service.back;
 
 import java.util.Map;
+import java.util.Set;
 
 import cn.mldn.singup.vo.News;
 
 public interface INewsServiceBack {
+	/**
+	 * 实现公告数据的批量删除处理
+	 * @param ids 要删除的数据集合
+	 * @return 如果集合为null，或者长度为0、删除失败都会返回false
+	 */
+	public boolean remove(Set<Integer> ids) ;
 	
 	/**
 	 * 实现新闻数据的保存处理，调用如下的操作：<br>

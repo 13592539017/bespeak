@@ -24,6 +24,22 @@ import cn.mldn.util.split.SplitPageUtil;
 
 public abstract class AbstractAction {
 	/**
+	 * 主要是进行批量数据处理的时候转换操作，在前端批量删除或更新的时候会传入一个ids的参数
+	 * 参数的内容组成：“id|id|id...”
+	 * @param request
+	 * @return
+	 */
+	public Set<Integer> getBatchIds(HttpServletRequest request) {
+		Set<Integer> set = new HashSet<Integer>() ;
+		String ids = request.getParameter("ids") ;
+		String result [] = ids.split("\\|") ;
+		for (int x = 0 ; x < result.length ; x ++) {
+			set.add(Integer.parseInt(result[x])) ;
+		}
+		return set ;
+	}
+	
+	/**
 	 * 进行分页数据传递的相关处理
 	 * @param mav 要传递数据的ModelAndView对象
 	 * @param allRecorders 总记录数，不同的统计出现的总记录数不同

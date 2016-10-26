@@ -2,10 +2,18 @@ package cn.mldn.singup.dao;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import cn.mldn.singup.vo.News;
 
 public interface INewsDAO {
+	/**
+	 * 实现数据的批量删除操作，执行到此层次的Set集合一定有数据 
+	 * @param nids
+	 * @return 
+	 */
+	public boolean doRemove(Object ids[]) ;
+	
 	/**
 	 * 公告信息的更新处理
 	 * @param vo
