@@ -4,18 +4,19 @@ $(function(){
 		var name = $(this).text() ;
 		$(this).on("click",function(){
 			$.post("admin/bespeak/show.action",{beid:bid},function(data){
-				if (data.bespeak.name != undefined) {	// 现在有数据返回
+				if (data.bespeak.srcid != undefined) {	// 现在有数据返回
 					$(currBid).val(bid) ;
 					$(nameTitleSpan).text(name) ;
-					$(modalName).text(data.bespeak.name) ;
+					$(modalName).text(data.bespeak.name == null ? "null" : data.bespeak.name) ;
 					$(modalPhone).text(data.bespeak.phone) ;
 					$(modalSource).text(data.bespeak.src) ;
 					$(modalEdu).text(data.bespeak.edu) ;
-					$(modalSchool).text(data.bespeak.school) ;
+					$(modalSchool).text(data.bespeak.school == null ? "null" : data.bespeak.school) ;
 					$(modalIndate).text(new Date(data.bespeak.indate.time).format("yyyy-MM-dd hh:mm:ss.S")) ;
 					$(modalBedate).text(new Date(data.bespeak.bedate.time).format("yyyy-MM-dd hh:mm:ss.S")) ;
 					$(modalBenote).text(data.bespeak.benote) ;
 					$(modalNote).text(data.bespeak.note) ;
+					$(newNote).val("") ;	// 清空上一次的追加备注内容
 					$(bespeakInfo).modal("toggle") ;
 				} else {
 					operateAlert(true , "报名信息加载失败！！","报名信息加载失败！！") ;
@@ -26,9 +27,11 @@ $(function(){
 	$("#myform").validate({
 		debug : true, // 取消表单的提交操作
 		submitHandler : function(form) {
-			console.log("bid = " + $(currBid).val() + "、newNote = " + $(newNote).val()) ;
-			$(bespeakInfo).modal("toggle") ;
-			operateAlert(true , "报名备注追加成功！","报名备注追加失败！") ;
+			// console.log("bid = " + $(currBid).val() + "、newNote = " + $(newNote).val()) ;
+			$.post("admin/bespeak/editNote.action",{beid:$(currBid).val(),"note":$(newNote).val()},function(data) {
+				operateAlert(data.trim() == "true" , "报名备注追加成功！","报名备注追加失败！") ;
+				$(bespeakInfo).modal("toggle") ;
+			},"text") ;
 		},
 		errorPlacement : function(error, element) {
 			$("#" + $(element).attr("id").replace(".", "\\.") + "Msg").append(error);

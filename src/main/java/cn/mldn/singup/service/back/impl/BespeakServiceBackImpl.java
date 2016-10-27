@@ -21,6 +21,17 @@ public class BespeakServiceBackImpl extends AbstractServiceBack implements IBesp
 	@Override
 	@RequiresRoles("bespeak")
 	@RequiresPermissions("bespeak:list")
+	public boolean editNote(int beid, String newNote) {
+		Map<String,Object> param = new HashMap<String,Object>() ;
+		Bespeak vo = this.bespeakDAO.findById(beid) ;
+		param.put("beid", beid) ;
+		param.put("newNote", vo.getNote() + newNote + "\n") ; 
+		return this.bespeakDAO.doUpdateNote(param);
+	}
+	
+	@Override
+	@RequiresRoles("bespeak")
+	@RequiresPermissions("bespeak:list")
 	public Bespeak get(int beid) {
 		return this.bespeakDAO.findById(beid);
 	} 

@@ -39,7 +39,7 @@
 					<jsp:include page="/WEB-INF/pages/plugins/include_splitpage_search.jsp"/>
 					<table class="table table-hover">
 						<tr> 
-							<th width="20%" class="text-center">姓名</th> 
+							<th width="10%" class="text-center">姓名</th> 
 							<th width="10%" class="text-center">电话</th>
 							<th width="20%" class="text-center">信息来源</th>
 							<th width="10%" class="text-center">学历</th>

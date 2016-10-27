@@ -6,6 +6,14 @@ import java.util.Map;
 import cn.mldn.singup.vo.Bespeak;
 
 public interface IBespeakDAO {
+	/**
+	 * 实现备注数据的更新处理操作，本操作中需要传入的Map集合包含有如下内容：<br>
+	 * 1、key = beid、value = 要追加备注的id信息；<br>
+	 * 2、key = newNote、value = 要追加的备注信息。<br>
+	 * @return
+	 */
+	public boolean doUpdateNote(Map<String,Object> param) ;
+	
 	public boolean doCreate(Bespeak vo) ;
 	/**
 	 * 根据id查看报名详情信息

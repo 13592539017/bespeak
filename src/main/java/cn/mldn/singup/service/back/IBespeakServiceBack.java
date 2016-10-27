@@ -6,6 +6,14 @@ import cn.mldn.singup.vo.Bespeak;
 
 public interface IBespeakServiceBack {
 	/**
+	 * 进行备注信息的更新处理操作
+	 * @param beid
+	 * @param newNote
+	 * @return 
+	 */
+	public boolean editNote(int beid,String newNote) ; 
+	
+	/**
 	 * 根据报名的id查找到报名的完整信息
 	 * @param beid
 	 * @return
