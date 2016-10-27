@@ -49,7 +49,7 @@
 							<th width="10%" class="text-center">操作</th>
 						</tr>
 						<c:forEach items="${allBespeaks}" var="bespeak">
-							<tr>
+							<tr id="bespeak-${bespeak.beid}">
 								<td class="text-center"><a id="showBespeakInfo-${bespeak.beid}">${bespeak.name}</a></td>
 								<td class="text-center">${bespeak.phone}</td>
 								<td class="text-center">${bespeak.src}</td>

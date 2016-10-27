@@ -7,6 +7,15 @@ import cn.mldn.singup.vo.Bespeak;
 
 public interface IBespeakDAO {
 	/**
+	 * 实现报名状态切换的操作处理
+	 * @param param 本操作中需要传入的Map集合包含有如下内容：<br>
+	 * 1、key = beid、value = 要追加备注的id信息；<br>
+	 * 2、key = status、value = 要更新的状态值。<br>
+	 * @return
+	 */
+	public boolean doUpdateStatus(Map<String,Object> param) ;
+	
+	/**
 	 * 实现备注数据的更新处理操作，本操作中需要传入的Map集合包含有如下内容：<br>
 	 * 1、key = beid、value = 要追加备注的id信息；<br>
 	 * 2、key = newNote、value = 要追加的备注信息。<br>

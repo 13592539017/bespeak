@@ -20,12 +20,26 @@ public class BespeakServiceBackImpl extends AbstractServiceBack implements IBesp
 	
 	@Override
 	@RequiresRoles("bespeak")
-	@RequiresPermissions("bespeak:list")
+	@RequiresPermissions("bespeak:edit")
+	public boolean editStatus(int beid, int status) {
+		Map<String,Object> param = new HashMap<String,Object>() ;
+		param.put("beid", beid) ;
+		param.put("status", status) ; 
+		return this.bespeakDAO.doUpdateStatus(param);
+	} 
+	
+	@Override
+	@RequiresRoles("bespeak")
+	@RequiresPermissions("bespeak:edit")
 	public boolean editNote(int beid, String newNote) {
 		Map<String,Object> param = new HashMap<String,Object>() ;
 		Bespeak vo = this.bespeakDAO.findById(beid) ;
 		param.put("beid", beid) ;
-		param.put("newNote", vo.getNote() + newNote + "\n") ; 
+		param.put("newNote", vo.getNote() + newNote + "\n") ;
+		if (vo.getStatus().equals(0)) {	// 当前并未处理此报名信息
+			param.put("status", 1) ;
+			this.bespeakDAO.doUpdateStatus(param) ; 
+		}
 		return this.bespeakDAO.doUpdateNote(param);
 	}
 	

@@ -1,4 +1,17 @@
 $(function(){
+	$("button[id*=invalidBut-]").each(function(){
+		var bid = this.id.split("-") [1] ;
+		// console.log(bid) ;
+		$(this).on("click",function(){
+			$.post("admin/bespeak/editStatus.action",{beid:bid,status:2},function(data){
+				if (data.trim() == "true") {
+					$("#bespeak-" + bid).remove() ;
+				}
+				operateAlert(data.trim() == "true" , "报名信息已废弃！","报名信息移除失败！") ;
+				
+			},"text") ;
+		}) ;
+	}) ;
 	$("a[id*=showBespeakInfo]").each(function() {
 		var bid = this.id.split("-") [1] ;
 		var name = $(this).text() ;

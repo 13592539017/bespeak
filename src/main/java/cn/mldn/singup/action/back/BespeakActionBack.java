@@ -25,6 +25,18 @@ public class BespeakActionBack extends AbstractAction {
 	@Resource
 	private IBespeakServiceBack bespeakServiceBack;
 
+	@RequestMapping("editStatus")
+	@RequiresRoles("bespeak")
+	@RequiresPermissions("bespeak:edit")
+	public ModelAndView editStatus(int beid, int status, HttpServletResponse response) {
+		if (this.bespeakServiceBack.editStatus(beid, status)) {
+			super.print(response, true);
+		} else { 
+			super.print(response, false);
+		}	 
+		return null;
+	}
+	
 	@RequestMapping("editNote")
 	@RequiresRoles("bespeak")
 	@RequiresPermissions("bespeak:edit")

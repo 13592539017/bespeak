@@ -5,7 +5,9 @@
 	<update id="doUpdateNote" parameterType="java.util.Map">
 		UPDATE bespeak SET note=#{newNote} WHERE beid=#{beid}
 	</update>
-
+	<update id="doUpdateStatus" parameterType="java.util.Map">
+		UPDATE bespeak SET status=#{status} WHERE beid=#{beid} AND status!=2 ;
+	</update> 
 	<select id="findById" parameterType="Integer" resultType="Bespeak">
 		SELECT beid,typeid,eduid,srcid,name,phone,school,edu,bedate,indate,status,benote,note,type,src
 		FROM bespeak WHERE beid=#{beid}

@@ -6,6 +6,14 @@ import cn.mldn.singup.vo.Bespeak;
 
 public interface IBespeakServiceBack {
 	/**
+	 * 实现报名状态的一个控制
+	 * @param beid
+	 * @param status
+	 * @return
+	 */
+	public boolean editStatus(int beid,int status) ;
+	
+	/**
 	 * 进行备注信息的更新处理操作
 	 * @param beid
 	 * @param newNote
