@@ -28,7 +28,11 @@
 										<button id="createNewsBut" class="btn btn-info btn-lg"><i class="fa fa-plus-circle"></i>&nbsp;生成公告信息列表</button>
 									</shiro:hasPermission>
 								</shiro:hasRole>
-								<button class="btn btn-success btn-lg"><i class="fa  fa-slideshare"></i>&nbsp;生成预约分类信息</button>
+								<shiro:hasRole name="bespeak">
+									<shiro:hasPermission name="bespeak:list">
+										<button id="createBespeakBut" class="btn btn-success btn-lg"><i class="fa  fa-slideshare"></i>&nbsp;生成预约分类信息</button>
+									</shiro:hasPermission>
+								</shiro:hasRole> 
 							</td>
 						</tr>
 						<tr> 

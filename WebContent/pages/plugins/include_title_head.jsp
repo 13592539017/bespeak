@@ -2,7 +2,7 @@
 <header class="main-header">
 
 	<!-- Logo -->
-	<a href="pages/back/index.jsp" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+	<a href="admin/indexBack.action" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 		<span class="logo-mini"><b>M</b>B</span> <!-- logo for regular state and mobile devices -->
 		<span class="logo-lg"><b>MLDN</b>Bespeak</span>
 	</a>

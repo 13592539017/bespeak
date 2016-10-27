@@ -66,7 +66,7 @@
 						<form action="" id="myform" method="post" class="form-horizontal" enctype="multipart/form-data">
 							<div class="form-group" id="newNoteDiv">
 								<div class="col-md-11">
-									<textarea id="newNote" name="newNote" class="form-control"></textarea>
+									<textarea id="newNote" name="newNote" class="form-control" style="width:742px;"></textarea>
 								</div>
 							</div>
 							<div class="form-group"> 

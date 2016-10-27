@@ -7,6 +7,18 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CreateStaticUtil<T> {
+	public void createJSON(File file,Object obj) {
+		PrintStream out = null;
+		try {
+			out = new PrintStream(new FileOutputStream(file));
+			out.print(obj); 
+		} catch (Exception e) {
+			e.printStackTrace(); 
+		} finally {
+			out.close();
+		}
+	}
+	
 	public void create(File file, List<T> all) {
 		PrintStream out = null;
 		try {
