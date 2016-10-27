@@ -11,7 +11,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6">
-			<a href="pages/front/bespeak/bespeak_add.jsp"><img id="but-pre" src="images/but/but-pre.jpg"></a>
+			<a href="bespeak/addPre.action"><img id="but-pre" src="images/but/but-pre.jpg"></a>
 		</div>
 		<div class="col-md-6">
 			<a href="loginUrl.action"><img id="but-login" src="images/but/but-login.jpg"></a>

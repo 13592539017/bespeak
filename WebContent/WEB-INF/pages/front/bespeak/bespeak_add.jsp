@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/pages/plugins/include_static_head.jsp" %>
 <%
-	String bespeakAddUrl = basePath + "pages/front/bespeak/add.action" ;
+	String bespeakAddUrl = basePath + "bespeak/add.action" ;
 %>
 <html>
 <head>
@@ -56,43 +56,29 @@
 								</div>
 								<div class="col-md-4" id="schoolMsg">*</div>
 							</div>
-							<div class="form-group" id="eduDiv">
-								<label class="col-md-2 control-label" for="edu">最高学历：</label>
+							<div class="form-group" id="eduidDiv">
+								<label class="col-md-2 control-label" for="eduid">最高学历：</label>
 								<div class="col-md-5">
-									<select id="edu" name="edu" class="form-control">
+									<select id="eduid" name="eduid" class="form-control">
 										<option value="">====== 请选择您的学历 ======</option>
-										<option value="1">博士</option>
-										<option value="2">硕士</option>
-										<option value="2">大学本科</option>
-										<option value="2">大学本科</option>
-										<option value="2">高中</option>
-										<option value="2">初中</option>
-										<option value="3">小学</option>
 									</select>
 								</div> 
-								<div class="col-md-4" id="eduMsg">*</div>
+								<div class="col-md-4" id="eduidMsg">*</div>
 							</div>
-							<div class="form-group" id="typeDiv">
-								<label class="col-md-2 control-label" for="type">预约类型：</label>
+							<div class="form-group" id="typeidDiv">
+								<label class="col-md-2 control-label" for="typeid">预约类型：</label>
 								<div class="col-md-5">
-									<select id="type" name="type" class="form-control">
+									<select id="typeid" name="typeid" class="form-control">
 										<option value="">====== 请告诉我您的预约类型 ======</option>
-										<option value="1">上门访问</option>
-										<option value="2">内容咨询</option>
-										<option value="2">网络学习</option>
-										<option value="2">入学报道</option>
 									</select>
 								</div> 
-								<div class="col-md-4" id="typeMsg">*</div>
+								<div class="col-md-4" id="typeidMsg">*</div>
 							</div>
-							<div class="form-group" id="srcDiv">
-								<label class="col-md-2 control-label" for="src">信息来源：</label>
+							<div class="form-group" id="srcidDiv">
+								<label class="col-md-2 control-label" for="srcid">信息来源：</label>
 								<div class="col-md-5">
-									<select id="src" name="src" class="form-control">
+									<select id="srcid" name="srcid" class="form-control">
 										<option value="">====== 您是从那里知道的我们？ ======</option>
-										<option value="1">网络</option>
-										<option value="2">图书出版物</option>
-										<option value="2">朋友介绍</option>
 									</select>
 								</div> 
 								<div class="col-md-4" id="srcMsg">*</div>
