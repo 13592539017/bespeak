@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.mldn.singup.service.back.IBespeakServiceBack;
 import cn.mldn.util.action.AbstractAction;
 import cn.mldn.util.split.SplitPageUtil;
+import net.sf.json.JSONObject;
 @Controller
 @RequestMapping("/admin/bespeak/*")
 public class BespeakActionBack extends AbstractAction {
@@ -56,6 +58,16 @@ public class BespeakActionBack extends AbstractAction {
 		mav.addObject("allBespeaks", result.get("allBespeaks")); // 真正需要进行显示的数据的集合
 		return mav ;
 	}
+	@RequestMapping("show")
+	@RequiresRoles("bespeak")
+	@RequiresPermissions("bespeak:list")
+	public ModelAndView show(int beid,HttpServletResponse response) {
+		JSONObject obj = new JSONObject() ;
+		obj.put("bespeak", this.bespeakServiceBack.get(beid)) ; 
+		super.print(response, obj);
+		return null ; 
+	}
+	
 	@RequestMapping("invalid")
 	@RequiresRoles("bespeak")
 	@RequiresPermissions("bespeak:list")

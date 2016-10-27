@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="cn.mldn.singup.dao.IBespeakDAO">
+	<select id="findById" parameterType="Integer" resultType="Bespeak">
+		SELECT beid,typeid,eduid,srcid,name,phone,school,edu,bedate,indate,status,benote,note,type,src
+		FROM bespeak WHERE beid=#{beid}
+	</select>
 	<select id="findAllSplitByStatus" parameterType="java.util.Map" resultType="Bespeak">
 		SELECT beid,typeid,eduid,srcid,name,phone,school,edu,bedate,indate,status,benote,note,type,src
 		FROM bespeak 

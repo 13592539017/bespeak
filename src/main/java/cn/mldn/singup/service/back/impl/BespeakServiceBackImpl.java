@@ -12,10 +12,19 @@ import org.springframework.stereotype.Service;
 import cn.mldn.singup.dao.IBespeakDAO;
 import cn.mldn.singup.service.back.IBespeakServiceBack;
 import cn.mldn.singup.service.back.abs.AbstractServiceBack;
+import cn.mldn.singup.vo.Bespeak;
 @Service
 public class BespeakServiceBackImpl extends AbstractServiceBack implements IBespeakServiceBack {
 	@Resource
 	private IBespeakDAO bespeakDAO ;
+	
+	@Override
+	@RequiresRoles("bespeak")
+	@RequiresPermissions("bespeak:list")
+	public Bespeak get(int beid) {
+		return this.bespeakDAO.findById(beid);
+	} 
+	
 	@Override
 	@RequiresRoles("bespeak")
 	@RequiresPermissions("bespeak:list")

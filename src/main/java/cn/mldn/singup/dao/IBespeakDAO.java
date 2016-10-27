@@ -8,6 +8,13 @@ import cn.mldn.singup.vo.Bespeak;
 public interface IBespeakDAO {
 	public boolean doCreate(Bespeak vo) ;
 	/**
+	 * 根据id查看报名详情信息
+	 * @param beid
+	 * @return
+	 */
+	public Bespeak findById(Integer beid) ;
+	
+	/**
 	 * 实现分页的数据列表，处理的时候采用动态SQL，如果没有column或keyWord表示查询全部
 	 * @param params 包含有如下的几个参数：<br>
 	 * 1、key = column、value = 模糊查询的数据列；<br>

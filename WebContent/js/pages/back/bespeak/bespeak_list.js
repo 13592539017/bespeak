@@ -3,9 +3,24 @@ $(function(){
 		var bid = this.id.split("-") [1] ;
 		var name = $(this).text() ;
 		$(this).on("click",function(){
-			$(currBid).val(bid) ;
-			$(nameTitleSpan).text(name) ;
-			$(bespeakInfo).modal("toggle") ;
+			$.post("admin/bespeak/show.action",{beid:bid},function(data){
+				if (data.bespeak.name != undefined) {	// 现在有数据返回
+					$(currBid).val(bid) ;
+					$(nameTitleSpan).text(name) ;
+					$(modalName).text(data.bespeak.name) ;
+					$(modalPhone).text(data.bespeak.phone) ;
+					$(modalSource).text(data.bespeak.src) ;
+					$(modalEdu).text(data.bespeak.edu) ;
+					$(modalSchool).text(data.bespeak.school) ;
+					$(modalIndate).text(new Date(data.bespeak.indate.time).format("yyyy-MM-dd hh:mm:ss.S")) ;
+					$(modalBedate).text(new Date(data.bespeak.bedate.time).format("yyyy-MM-dd hh:mm:ss.S")) ;
+					$(modalBenote).text(data.bespeak.benote) ;
+					$(modalNote).text(data.bespeak.note) ;
+					$(bespeakInfo).modal("toggle") ;
+				} else {
+					operateAlert(true , "报名信息加载失败！！","报名信息加载失败！！") ;
+				}
+			},"json") ;
 		}) ;
 	}) ;
 	$("#myform").validate({

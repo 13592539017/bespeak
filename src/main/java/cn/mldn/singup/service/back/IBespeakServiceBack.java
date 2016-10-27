@@ -2,7 +2,16 @@ package cn.mldn.singup.service.back;
 
 import java.util.Map;
 
+import cn.mldn.singup.vo.Bespeak;
+
 public interface IBespeakServiceBack {
+	/**
+	 * 根据报名的id查找到报名的完整信息
+	 * @param beid
+	 * @return
+	 */
+	public Bespeak get(int beid) ;
+	
 	/**
 	 * 实现数据的分页查询操作，需要进行如下的查询：<br>
 	 * 1、调用IBespeakDAO.findAllSplitByStatus()方法查询出具体的数据内容；<br>
