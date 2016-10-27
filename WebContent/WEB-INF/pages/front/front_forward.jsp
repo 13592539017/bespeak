@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="/pages/plugins/include_static_head.jsp" %>
+<%@include file="/pages/plugins/include_basepath.jsp" %>
+<%
+	String loginUrl = basePath + "pages/shiroLogin.action" ;
+%>
 <html>
 <head>
 <base href="<%=basePath%>">
 <jsp:include page="/pages/plugins/include_javascript.jsp" />
-<script type="text/javascript" src="js/pages/front/news/news_show.js"></script>
+<script type="text/javascript" src="js/pages/login.js"></script>
 </head>
 <body>
 	<div class="container contentback" >
@@ -23,19 +26,19 @@
 		<div id="newsDiv" class="row">
 			<div class="col-md-12">
 				<div class="panel panel-info">
-					<div class="panel-heading"><strong><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;信息查看</strong></div>
+					<div class="panel-heading"><strong><span class="glyphicon glyphicon-user"></span>&nbsp;内部用户登录</strong></div>
 					<div class="panel-body">
-						<div class="text-center h2">${news.title}</div>
-						<div class="text-primary"><strong>新闻摘要：</strong>${news.abs}</div>
-						<div class="text-primary"><strong>发布日期：</strong>${news.pubdate}</div>
 						<div>
-							<pre class="pre-scrollable" style="height:300px;">
-								<div><img src="upload/news/${news.photo}" style="width:500px;"></div>
-								<div>${news.content}</div>
-							</pre>
+							<div>${msg}</div>
+							<div><span id="mytime">2</span>秒后跳转到<a href="<%=basePath%>${url}">首页</a>！</div>
 						</div>
+						<script type="text/javascript">
+							var goUrl = "<%=basePath%>${url}" ;
+							goTime() ; 
+						</script>
 					</div>
-					<div class="panel-footer">
+					<div class="panel-footer text-right">
+						<span class="glyphicon glyphicon-warning-sign"></span>&nbsp;忘记密码，请联系管理员
 					</div>
 				</div>
 			</div>

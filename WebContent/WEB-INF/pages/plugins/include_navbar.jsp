@@ -8,7 +8,7 @@
 			</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="pages/index.jsp" target="_ablank"><strong><span class="glyphicon glyphicon-home"></span>&nbsp;首页</strong></a></li>
+			<li class="active"><a href="index.action" target="_ablank"><strong><span class="glyphicon glyphicon-home"></span>&nbsp;首页</strong></a></li>
 			<li><a href="pages/front/news/news_list.jsp" target="_ablank"><strong><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;公告</strong></a></li>
 			<li><a href="pages/front/bespeak/bespeak_add.jsp" target="_ablank"><strong><span class="glyphicon glyphicon-calendar"></span>&nbsp;预约报名</strong></a></li>
 			<li><a href="loginUrl.action" target="_ablank"><strong><span class="glyphicon glyphicon-user"></span>&nbsp;登录</strong></a></li>

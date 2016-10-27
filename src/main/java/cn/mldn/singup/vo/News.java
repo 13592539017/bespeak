@@ -91,7 +91,7 @@ public class News implements Serializable {
 
 	@Override
 	public String toString() {
-		return "<li><a href=\"/news/show.action?nid=" + this.nid
+		return "<li><a href=\"news/show.action?nid=" + this.nid
 				+ "\"><span class=\"glyphicon glyphicon-exclamation-sign text-danger\"></span>&nbsp;【"
 				+ FormDateUtil.formatDate(this.pubdate) + "】" + this.title + "</a></li>";
 	}
