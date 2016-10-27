@@ -2,6 +2,7 @@ package cn.mldn.singup.service.back.impl;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -24,6 +25,16 @@ public class NewsServiceBackImpl extends AbstractServiceBack implements INewsSer
 	private IDictionaryDAO dictionaryDAO;
 	@Resource
 	private INewsDAO newsDAO;
+	
+	@Override
+	@RequiresRoles("news")
+	@RequiresPermissions("news:list")
+	public List<News> listByFlag(int currentPage, int lineSize, int flag) {
+		Map<String,Object> param = super.handleParams(null, null, currentPage, lineSize) ;
+		param.put("flag", flag) ;
+		return this.newsDAO.findAllSplitByFlag(param); 
+	}
+	
 	@Override
 	@RequiresRoles("news")
 	@RequiresPermissions("news:edit")

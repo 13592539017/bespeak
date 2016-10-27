@@ -1,5 +1,6 @@
 package cn.mldn.singup.action.back;
 
+import java.io.File;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.mldn.singup.service.back.INewsServiceBack;
 import cn.mldn.singup.vo.News;
+import cn.mldn.util.CreateStaticUtil;
 import cn.mldn.util.action.AbstractAction;
 import cn.mldn.util.split.SplitPageUtil;
 
@@ -52,6 +54,17 @@ public class NewsActionBack extends AbstractAction {
 		return mav;
 	}
 
+	@RequestMapping("create")
+	@RequiresRoles("news")
+	@RequiresPermissions("news:list")
+	public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
+		String filePath = request.getServletContext().getRealPath("/") + "WEB-INF" + File.separator + "news.static" ; 
+		new CreateStaticUtil<News>().create(new File(filePath), this.newsServiceBack.listByFlag(1, 13, 1));
+		super.print(response, true); 
+		return null;
+	}  
+	
+	
 	@RequestMapping("editPre")
 	@RequiresRoles("news")
 	@RequiresPermissions("news:edit")

@@ -1,11 +1,21 @@
 package cn.mldn.singup.service.back;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import cn.mldn.singup.vo.News;
 
 public interface INewsServiceBack {
+	/** 
+	 * 根据公告的状态列出指定范围的数据 
+	 * @param currentPage
+	 * @param lineSize
+	 * @param flag
+	 * @return
+	 */
+	public List<News> listByFlag(int currentPage,int lineSize,int flag) ;
+	
 	/**
 	 * 实现公告数据的批量删除处理
 	 * @param ids 要删除的数据集合

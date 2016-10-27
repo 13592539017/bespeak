@@ -25,22 +25,7 @@
 				<div class="panel panel-info">
 					<div class="panel-heading"><strong><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;公司要闻</strong></div>
 					<div class="panel-body">
-						<ul>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】我们牛逼了。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】大家赶紧去上班。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】我们真要去上班。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】上班太好了。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】真的爽屁了。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】真的爽屁了。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】真的爽屁了。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】真的爽屁了。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】真的爽屁了。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】真的爽屁了。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】真的爽屁了。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】真的爽屁了。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】真的爽屁了。</a></li>
-							<li><a href="pages/front/news/news_show.jsp"><span class="glyphicon glyphicon-exclamation-sign text-danger"></span>&nbsp;【2010-10-10】真的爽屁了。</a></li>
-						</ul>
+						<ul><jsp:include page="/WEB-INF/news.static"/></ul>
 					</div>
 					<div class="panel-footer text-right">
 						<a href="pages/front/news/news_list.jsp">

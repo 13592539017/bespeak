@@ -5,6 +5,7 @@
 <head>
 <base href="<%=basePath%>">
 <jsp:include page="/WEB-INF/pages/plugins/include_javascript_head.jsp" />
+<script type="text/javascript" src="js/pages/back/index.js"></script> 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -20,15 +21,23 @@
 				<div class="panel-body">
 					<table class="table table-bordered table-hover">
 						<tr>
-							<td colspan="3"><span class="h1"><span class="glyphicon glyphicon-user"></span>&nbsp;欢迎“<shiro:principal/>”光临！</span></td>
+							<td colspan="3">
+								<span class="h1"><span class="glyphicon glyphicon-user"></span>&nbsp;欢迎“<shiro:principal/>”光临！</span>
+								<shiro:hasRole name="news">
+									<shiro:hasPermission name="news:list">
+										<button id="createNewsBut" class="btn btn-info btn-lg"><i class="fa fa-plus-circle"></i>&nbsp;生成公告信息列表</button>
+									</shiro:hasPermission>
+								</shiro:hasRole>
+								<button class="btn btn-success btn-lg"><i class="fa  fa-slideshare"></i>&nbsp;生成预约分类信息</button>
+							</td>
 						</tr>
-						<tr>
+						<tr> 
 							<td rowspan="6" style="width:130px;">
 								<img src="upload/news/nophoto.gif" class="image" style="height:128px;width:128px;">
 							</td>
 						</tr>
 						<tr>
-							<td><strong>总预约数量：</strong></td>
+							<td style="width:15%"><strong>总预约数量：</strong></td>
 							<td>20</td>
 						</tr>
 						<tr>
@@ -45,7 +54,8 @@
 						</tr>
 					</table>
 				</div>
-				<div class="panel-footer">
+				<div class="panel-footer" style="height:80px;">
+					<jsp:include page="/WEB-INF/pages/plugins/include_alert.jsp"/>
 				</div>
 			</div>
 		</div>

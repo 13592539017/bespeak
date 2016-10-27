@@ -38,7 +38,7 @@ public interface INewsDAO {
 	 * 5、key = flag、value = 发布状态。<br>
 	 * @return
 	 */	
-	public List<News> findAllSplitByFlag(Map<String,Object> params) ;
+	public List<News> findAllSplitByFlag(Map<String,Object> params) ; 
 	/**
 	 * 进行数据的模糊查询统计操作，处理采用了的动态SQL，没有column与keyWord统计全表数据量
 	 * @param params  包含有如下的几个参数：<br>
