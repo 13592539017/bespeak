@@ -6,6 +6,16 @@ import cn.mldn.singup.vo.Bespeak;
 
 public interface IBespeakServiceBack {
 	/**
+	 * 进行报名信息量的统计处理
+	 * @return 返回有如下的数据组成：<br>
+	 * 1、key = all、value = 全部记录数；
+	 * 2、key = status0、value = 新报名的记录数；
+	 * 3、key = status1、value = 已处理预约；
+	 * 4、key = status2、value = 废弃的预约。
+	 */
+	public Map<String,Object> loadCount() ;
+	
+	/**
 	 * 实现报名状态的一个控制
 	 * @param beid
 	 * @param status

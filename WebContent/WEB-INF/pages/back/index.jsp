@@ -38,23 +38,24 @@
 						<tr> 
 							<td rowspan="6" style="width:130px;">
 								<img src="upload/news/nophoto.gif" class="image" style="height:128px;width:128px;">
+								<button id="loadBut" class="btn btn-warning">更新报名信息</button>
 							</td>
 						</tr>
 						<tr>
 							<td style="width:15%"><strong>总预约数量：</strong></td>
-							<td>20</td>
+							<td id="allBespeak">20</td>
 						</tr>
 						<tr>
 							<td><strong>新的预约：</strong></td>
-							<td>20</td>
-						</tr>
-						<tr>
-							<td><strong>未处理预约：</strong></td>
-							<td>20</td>
+							<td id="status0Bespeak">20</td>
 						</tr>
 						<tr>
 							<td><strong>已处理预约：</strong></td>
-							<td>20</td>
+							<td id="status1Bespeak">20</td>
+						</tr>
+						<tr>
+							<td><strong>已废除预约：</strong></td>
+							<td id="status2Bespeak">20</td>
 						</tr>
 					</table>
 				</div>

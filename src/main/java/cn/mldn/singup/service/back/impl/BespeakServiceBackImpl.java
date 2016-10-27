@@ -1,6 +1,7 @@
 package cn.mldn.singup.service.back.impl;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -13,10 +14,23 @@ import cn.mldn.singup.dao.IBespeakDAO;
 import cn.mldn.singup.service.back.IBespeakServiceBack;
 import cn.mldn.singup.service.back.abs.AbstractServiceBack;
 import cn.mldn.singup.vo.Bespeak;
+import cn.mldn.singup.vo.BespeakCount;
 @Service
 public class BespeakServiceBackImpl extends AbstractServiceBack implements IBespeakServiceBack {
 	@Resource
 	private IBespeakDAO bespeakDAO ;
+	
+	@Override
+	public Map<String, Object> loadCount() {
+		Map<String,Object> map = new HashMap<String,Object>() ;
+		map.put("all", this.bespeakDAO.getAllCountByStatus(map)) ;
+		Iterator<BespeakCount> iter = this.bespeakDAO.getStatusCount().iterator() ;
+		while (iter.hasNext()) {
+			BespeakCount bc = iter.next() ;
+			map.put("status" + bc.getStatus(), bc.getCount()) ;
+		}
+		return map ;
+	}
 	
 	@Override
 	@RequiresRoles("bespeak")

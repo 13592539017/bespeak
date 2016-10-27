@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,6 +26,15 @@ public class BespeakActionBack extends AbstractAction {
 	@Resource
 	private IBespeakServiceBack bespeakServiceBack;
 
+	@RequestMapping("count")
+	@RequiresUser
+	public ModelAndView count(HttpServletResponse response) {
+		JSONObject obj = new JSONObject() ;
+		obj.put("stat", this.bespeakServiceBack.loadCount()) ;
+		super.print(response, obj); 
+		return null;
+	}
+	
 	@RequestMapping("editStatus")
 	@RequiresRoles("bespeak")
 	@RequiresPermissions("bespeak:edit")

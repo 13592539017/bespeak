@@ -4,8 +4,15 @@ import java.util.List;
 import java.util.Map;
 
 import cn.mldn.singup.vo.Bespeak;
+import cn.mldn.singup.vo.BespeakCount;
 
 public interface IBespeakDAO {
+	/**
+	 * 根据status的内容进行数据的分组，而后取得每组的查询结果
+	 * @return
+	 */
+	public List<BespeakCount> getStatusCount() ;
+	
 	/**
 	 * 实现报名状态切换的操作处理
 	 * @param param 本操作中需要传入的Map集合包含有如下内容：<br>
