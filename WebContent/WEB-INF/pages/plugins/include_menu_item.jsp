@@ -56,15 +56,13 @@
 				</a>
 					<ul class="treeview-menu">
 						<shiro:hasPermission name="bespeak:list">
-							<li class="${param.action=='bespeak:all' ? 'active' : ''}"><a href="pages/back/bespeak/bespeak_list.jsp?type=all"><i
+							<li class="${param.action=='bespeak:all' ? 'active' : ''}"><a href="<%=basePath%>admin/bespeak/list.action?type=all"><i
 									class="fa fa-laptop"></i> 预约报名列表</a></li>
-							<li class="${param.action=='bespeak:new' ? 'active' : ''}"><a href="pages/back/bespeak/bespeak_list.jsp?type=new"><i
+							<li class="${param.action=='bespeak:new' ? 'active' : ''}"><a href="<%=basePath%>admin/bespeak/wait.action?type=new"><i
 									class="fa fa-exclamation-circle"></i> 新的预约报名</a></li>
-							<li class="${param.action=='bespeak:wait' ? 'active' : ''}"><a href="pages/back/bespeak/bespeak_list.jsp?type=wait"><i
-									class="fa fa-vine"></i> 待处理预约报名</a></li>
-							<li class="${param.action=='bespeak:finish' ? 'active' : ''}"><a href="pages/back/bespeak/bespeak_list.jsp?type=finish"><i
+							<li class="${param.action=='bespeak:finish' ? 'active' : ''}"><a href="<%=basePath%>admin/bespeak/finish.action?type=finish"><i
 									class="fa fa-ticket"></i> 已处理预约报名</a></li>
-							<li class="${param.action=='bespeak:invalid' ? 'active' : ''}"><a href="pages/back/bespeak/bespeak_list.jsp?type=invalid"><i
+							<li class="${param.action=='bespeak:invalid' ? 'active' : ''}"><a href="<%=basePath%>admin/bespeak/invalid.action?type=invalid"><i
 									class="fa fa-trash"></i> 无效预约报名</a></li>
 						</shiro:hasPermission>
 					</ul></li>
