@@ -28,7 +28,7 @@
 						<ul><jsp:include page="/WEB-INF/news.static"/></ul>
 					</div>
 					<div class="panel-footer text-right">
-						<a href="pages/front/news/news_list.jsp">
+						<a href="news/list.action?ls=15">
 							<span class="glyphicon glyphicon-list-alt"></span>&nbsp;更多内容...
 						</a>
 					</div>
